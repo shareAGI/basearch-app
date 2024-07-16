@@ -2,5 +2,8 @@
   "manifest_version": 3,
   "name": "Adx24",
   "version": "0.0.0",
-  "icons": {}
+  "icons": {},
+  "chrome_url_overrides": {
+    "newtab": "blank/index.html"
+  }
 }
