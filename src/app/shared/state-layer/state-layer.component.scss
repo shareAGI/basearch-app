@@ -1,0 +1,35 @@
+:host {
+  position: absolute;
+  inset: 0;
+  background-color: currentColor;
+  opacity: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+// :not(:disabled) is intentionally not appended to the container selectors,
+// otherwise input[type=checkbox] elements will be skipped for unknown reasons.
+// Might be a bug.
+
+:host-context(.state-layer-trigger:hover:not(:disabled)),
+:host-context(
+    .state-layer-trigger-container:has(> .state-layer-trigger:hover)
+  ) {
+  @media (hover) {
+    opacity: var(--state-hover-state-layer-opacity);
+  }
+}
+
+:host-context(.state-layer-trigger:focus-visible),
+:host-context(
+    .state-layer-trigger-container:has(> .state-layer-trigger:focus-visible)
+  ) {
+  opacity: var(--state-focus-state-layer-opacity);
+}
+
+:host-context(.state-layer-trigger:active:not(:disabled)),
+:host-context(
+    .state-layer-trigger-container:has(> .state-layer-trigger:active)
+  ) {
+  opacity: var(--state-pressed-state-layer-opacity);
+}

@@ -1,0 +1,29 @@
+@use 'styles/typescales';
+
+:host {
+  display: flex;
+  height: 56px;
+  padding: 0px 8px;
+  align-items: center;
+  border-radius: var(--shape-corner-full);
+  background: var(--scheme-surface-container-high);
+}
+
+.leading {
+  display: flex;
+  padding: 0px 4px;
+  align-items: center;
+  color: var(--scheme-on-surface);
+}
+
+.content {
+  flex: 1 0 0;
+  display: flex;
+  padding: 0px 8px;
+  align-items: center;
+  @extend %typescale-body-large;
+}
+
+.trailing {
+  color: var(--scheme-on-surface-variant);
+}

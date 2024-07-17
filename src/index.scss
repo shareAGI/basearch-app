@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/utilities';
 @import 'normalize.css';
+@import 'https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap';
 
 html,
 body {
@@ -17,13 +18,13 @@ router-outlet {
 }
 ::-webkit-scrollbar-thumb {
   border-radius: var(--shape-corner-full);
-  background-color: var(--color-secondary);
+  background-color: var(--scheme-secondary);
 }
 
 ::selection {
-  background-color: var(--color-secondary-container);
-  color: var(--color-on-secondary-container);
-  text-decoration: underline dotted var(--color-outline);
+  background-color: var(--scheme-secondary-container);
+  color: var(--scheme-on-secondary-container);
+  text-decoration: underline dotted var(--scheme-outline);
 }
 
 :autofill {

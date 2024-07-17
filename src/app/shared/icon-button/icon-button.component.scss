@@ -1,0 +1,22 @@
+@use 'styles/pristine';
+
+:host {
+  @include pristine.button();
+  position: relative;
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  color: var(--scheme-on-surface-variant);
+  border-radius: var(--shape-corner-full);
+  user-select: none;
+}
+
+:host:disabled {
+  color: var(--scheme-on-disabled);
+}
+
+:host:enabled {
+  cursor: pointer;
+}

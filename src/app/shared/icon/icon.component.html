@@ -1,0 +1,14 @@
+@if (content(); as content) {
+  @switch (content.type) {
+    @case ('svg') {
+      <div class="content" [innerHTML]="content.value"></div>
+    }
+    @case ('glyph') {
+      @if (fontReady | async) {
+        {{ content.value }}
+      } @else {
+        △
+      }
+    }
+  }
+}

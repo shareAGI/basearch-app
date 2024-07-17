@@ -21,6 +21,9 @@
           }
         ],
         "styles": ["src/index.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["{projectRoot}/src"]
+        },
         "scripts": [],
         "server": "src/main.server.ts",
         "prerender": true,
@@ -80,6 +83,9 @@
           }
         ],
         "styles": ["src/index.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["{projectRoot}/src"]
+        },
         "scripts": [],
         "webWorkerTsConfig": "tsconfig.worker.json"
       }

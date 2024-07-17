@@ -1,0 +1,17 @@
+@use 'styles/typescales';
+
+:host {
+  display: flex;
+  max-width: 120px;
+  min-height: 24px;
+  padding: 0 8px;
+  margin: 4px;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--shape-corner-extra-small);
+  background: var(--scheme-inverse-surface);
+  color: var(--scheme-inverse-on-surface);
+  user-select: none;
+  pointer-events: none;
+  @extend %typescale-label-medium;
+}

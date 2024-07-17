@@ -1,0 +1,43 @@
+@mixin level($name) {
+  font-family: var(--typescale-#{$name}-font);
+  font-weight: var(--typescale-#{$name}-weight);
+  font-size: var(--typescale-#{$name}-size);
+  line-height: var(--typescale-#{$name}-line-height);
+  letter-spacing: var(--typescale-#{$name}-tracking);
+}
+
+@mixin inherit() {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+
+$-levels: (
+  'display-large',
+  'display-medium',
+  'display-small',
+  'headline-large',
+  'headline-medium',
+  'headline-small',
+  'title-large',
+  'title-medium',
+  'title-small',
+  'body-large',
+  'body-medium',
+  'body-small',
+  'label-large',
+  'label-medium',
+  'label-small'
+);
+
+%typescale-inherit {
+  @include inherit();
+}
+
+@each $level in $-levels {
+  %typescale-#{$level} {
+    @include level($level);
+  }
+}

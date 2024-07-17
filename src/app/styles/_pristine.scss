@@ -1,0 +1,78 @@
+@mixin button() {
+  appearance: none;
+  border: none;
+  padding-block: initial;
+  padding-inline: initial;
+  background-color: initial;
+  text-align: initial;
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+@mixin table() {
+  border-spacing: initial;
+}
+
+@mixin th() {
+  font-weight: initial;
+}
+
+@mixin heading() {
+  margin: initial;
+  margin-block: initial;
+  padding: initial;
+}
+
+@mixin anchor() {
+  text-decoration: none;
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+@mixin paragraph() {
+  margin: initial;
+  margin-block: initial;
+  padding: initial;
+}
+
+@mixin pre() {
+  margin: initial;
+}
+
+@mixin list() {
+  margin-block: initial;
+  padding-inline: initial;
+  list-style-type: none;
+}
+
+@mixin blockquote() {
+  margin-block: initial;
+  margin-inline: initial;
+}
+
+@mixin input() {
+  border: none;
+  padding-block: initial;
+  padding-inline: initial;
+  background-color: initial;
+
+  &:focus-visible {
+    outline: none;
+  }
+  // Remove the eye icon when input type is "password".
+  // Work for Chromium-based browsers too.
+  &::-ms-reveal {
+    display: none;
+  }
+}
+
+@mixin textarea() {
+  border: none;
+  padding: initial;
+  background-color: initial;
+  &:focus-visible {
+    outline: none;
+  }
+}
