@@ -1,3 +1,5 @@
+/// <reference types="@types/chrome" />
+
 /* eslint-disable no-console */
 import { bootstrapApplication } from '@angular/platform-browser';
 

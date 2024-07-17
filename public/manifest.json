@@ -11,5 +11,8 @@
       "matches": ["http://*/*", "https://*/*"],
       "js": ["{content}"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "{background}"
+  }
 }
