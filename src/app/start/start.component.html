@@ -17,34 +17,59 @@
     class="flex w-[55dvw] max-w-[680px] flex-col gap-[12px]"
     (ngSubmit)="onSubmit()"
   >
+    @let controls = form.controls;
     <adx-search>
+      @let placeholder =
+        searchSource() === 'internet'
+          ? 'Search from ' + controls.engine.value.name
+          : 'Search your bookmarks';
       <input
         adx-search-control
         type="search"
         autofocus
-        placeholder="Search from {{ form.controls.engine.value.name }}"
-        [formControl]="form.controls.keywords"
+        [placeholder]="placeholder"
+        [formControl]="controls.keywords"
       />
       <ng-container *adxSearchTrailing>
         <button adx-icon-button>
           <adx-icon icon="mic" />
         </button>
-        <button adx-icon-button>
-          <adx-icon icon="camera" />
-        </button>
+        @if (searchSource() === 'internet') {
+          <button adx-icon-button>
+            <adx-icon icon="camera" />
+          </button>
+        }
       </ng-container>
     </adx-search>
     <div class="flex px-[4px]">
-      <adx-chip-select
-        class="flex-1 px-[4px]"
-        [options]="searchEngineOptions"
-        [formControl]="form.controls.engine"
-      />
+      @switch (searchSource()) {
+        @case ('internet') {
+          <adx-chip-select
+            class="flex-1 px-[4px]"
+            [options]="internetSearchEngineOptions"
+            [formControl]="controls.engine"
+          />
+        }
+        @case ('bookmarks') {
+          <adx-chip-select
+            class="flex-1 px-[4px]"
+            [options]="bookmarkSearchModeOptions"
+            [formControl]="controls.mode"
+          />
+        }
+      }
       <div class="flex gap-[12px] items-end">
         <span class="text-on-surface-variant label-large">
-          Or from your bookmarks
+          @switch (searchSource()) {
+            @case ('internet') {
+              Or switch to bookmark search
+            }
+            @case ('bookmarks') {
+              Or back to explore the internet
+            }
+          }
         </span>
-        <adx-switch [icons]="true" />
+        <adx-switch [icons]="true" [(value)]="searchSourceSwitchValue" />
       </div>
     </div>
     <div class="h-[320px] pointer-events-none"></div>
