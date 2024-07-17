@@ -16,16 +16,83 @@ router-outlet {
   height: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  border-radius: var(--sys-shape-corner-full);
-  background-color: var(--sys-color-secondary);
+  border-radius: var(--shape-corner-full);
+  background-color: var(--color-secondary);
 }
 
 ::selection {
-  background-color: var(--sys-color-secondary-container);
-  color: var(--sys-color-on-secondary-container);
-  text-decoration: underline dotted var(--sys-color-outline);
+  background-color: var(--color-secondary-container);
+  color: var(--color-on-secondary-container);
+  text-decoration: underline dotted var(--color-outline);
 }
 
 :autofill {
-  border-radius: var(--sys-shape-corner-extra-small);
+  border-radius: var(--shape-corner-extra-small);
+}
+
+@layer utilities {
+  @mixin level($name) {
+    font-family: var(--typescale-#{$name}-font);
+    font-weight: var(--typescale-#{$name}-weight);
+    font-size: var(--typescale-#{$name}-size);
+    line-height: var(--typescale-#{$name}-line-height);
+    letter-spacing: var(--typescale-#{$name}-tracking);
+  }
+
+  @mixin inherit() {
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+  }
+
+  .display-large {
+    @include level('display-large');
+  }
+  .display-medium {
+    @include level('display-medium');
+  }
+  .display-small {
+    @include level('display-small');
+  }
+  .headline-large {
+    @include level('headline-large');
+  }
+  .headline-medium {
+    @include level('headline-medium');
+  }
+  .headline-small {
+    @include level('headline-small');
+  }
+  .title-large {
+    @include level('title-large');
+  }
+  .title-medium {
+    @include level('title-medium');
+  }
+  .title-small {
+    @include level('title-small');
+  }
+  .body-large {
+    @include level('body-large');
+  }
+  .body-medium {
+    @include level('body-medium');
+  }
+  .body-small {
+    @include level('body-small');
+  }
+  .label-large {
+    @include level('label-large');
+  }
+  .label-medium {
+    @include level('label-medium');
+  }
+  .label-small {
+    @include level('label-small');
+  }
+  .inherit {
+    @include inherit();
+  }
 }

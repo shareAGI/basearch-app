@@ -56,6 +56,13 @@ module.exports = {
       'on-success': 'var(--scheme-on-success)',
       'on-scrim': 'var(--scheme-on-scrim)',
     },
+    borderRadius: {
+      'none': '0px',
+      'extra-small': '4px',
+      'small': '8px',
+      'medium': '12px',
+      'large': '16px',
+    },
   },
   plugins: [],
 };
