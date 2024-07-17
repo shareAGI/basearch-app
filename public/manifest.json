@@ -5,5 +5,11 @@
   "icons": {},
   "chrome_url_overrides": {
     "newtab": "blank/index.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content-script.js"]
+    }
+  ]
 }
