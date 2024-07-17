@@ -20,7 +20,7 @@
             "input": "public"
           }
         ],
-        "styles": ["src/styles.scss"],
+        "styles": ["src/index.scss"],
         "scripts": [],
         "server": "src/main.server.ts",
         "prerender": true,
@@ -79,7 +79,7 @@
             "input": "public"
           }
         ],
-        "styles": ["src/styles.scss"],
+        "styles": ["src/index.scss"],
         "scripts": [],
         "webWorkerTsConfig": "tsconfig.worker.json"
       }
