@@ -1,0 +1,105 @@
+@use 'styles/pristine';
+
+:host {
+  position: relative;
+  display: inline-flex;
+  width: 52px;
+  height: 32px;
+  border-radius: var(--shape-corner-full);
+  background: var(--scheme-surface-variant);
+
+  .outline {
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--scheme-outline);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .container {
+    position: relative;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+  }
+
+  .touch {
+    @include pristine.button();
+    position: absolute;
+    inset: -4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+    cursor: pointer;
+  }
+
+  .handle {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+    background: var(--scheme-outline);
+    box-shadow: var(--elevation-1);
+  }
+
+  .icon {
+    color: var(--scheme-surface-container-highest);
+  }
+
+  adx-state-layer {
+    color: var(--scheme-on-surface);
+  }
+}
+:host {
+  &:has(.touch:hover),
+  &:has(.touch:focus-visible),
+  &:has(.touch:active) {
+    .handle {
+      background: var(--scheme-on-surface-variant);
+    }
+  }
+  &:has(.touch:active) {
+    .handle {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+:host.selected {
+  background: var(--scheme-primary);
+  justify-content: flex-end;
+
+  .outline {
+    border-color: var(--scheme-primary);
+  }
+
+  .handle {
+    width: 24px;
+    height: 24px;
+    background: var(--scheme-on-primary);
+  }
+
+  .icon {
+    color: var(--scheme-on-primary-container);
+  }
+
+  adx-state-layer {
+    color: var(--scheme-primary);
+  }
+}
+:host.selected {
+  &:has(.touch:hover),
+  &:has(.touch:focus-visible),
+  &:has(.touch:active) {
+    .handle {
+      background: var(--scheme-primary-container);
+    }
+  }
+}

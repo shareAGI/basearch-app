@@ -5,10 +5,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { listen, send } from '../../shared/messenger';
 import { QueryWallpaper, QueryWallpaperResolved } from '../../shared/wallpaper';
 import { useBrowserOnly } from '../common/platform-browser';
-import {
-  ChipSelectComponent,
-  ChipSelectOption,
-} from '../shared/chip-select/chip-select.component';
+import { ChipSelectComponent } from '../shared/chip-select/chip-select.component';
 import { IconComponent } from '../shared/icon/icon.component';
 import { provideIcons } from '../shared/icon/icons';
 import { IconButtonComponent } from '../shared/icon-button/icon-button.component';
@@ -18,6 +15,7 @@ import {
   SearchTrailingSlot,
 } from '../shared/search/search.component';
 import { SearchControlComponent } from '../shared/search-control/search-control.component';
+import { SwitchComponent } from '../shared/switch/switch.component';
 
 interface SearchEngine {
   name: string;
@@ -57,6 +55,7 @@ const SEARCH_ENGINES: SearchEngine[] = [
     [SearchComponent, SearchTrailingSlot, SearchControlComponent],
     IconComponent,
     ChipSelectComponent,
+    SwitchComponent,
   ],
   providers: [provideIcons({ iGoogle, iMicrosoft, iGitHub, iYouTube })],
   templateUrl: './start.component.html',
@@ -77,7 +76,7 @@ export class StartComponent {
     return `url(${url})`;
   });
 
-  searchEngineOptions: ChipSelectOption[] = SEARCH_ENGINES.map((e) => ({
+  searchEngineOptions = SEARCH_ENGINES.map((e) => ({
     label: e.name,
     value: e,
     icon: e.icon,

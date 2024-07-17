@@ -22,7 +22,7 @@
         adx-search-control
         type="search"
         autofocus
-        placeholder="Search"
+        placeholder="Search from {{ form.controls.engine.value.name }}"
         [formControl]="form.controls.keywords"
       />
       <ng-container *adxSearchTrailing>
@@ -34,11 +34,18 @@
         </button>
       </ng-container>
     </adx-search>
-    <div class="flex px-[8px]">
+    <div class="flex px-[4px]">
       <adx-chip-select
+        class="flex-1 px-[4px]"
         [options]="searchEngineOptions"
         [formControl]="form.controls.engine"
       />
+      <div class="flex gap-[12px] items-end">
+        <span class="text-on-surface-variant label-large">
+          Or from your bookmarks
+        </span>
+        <adx-switch [icons]="true" />
+      </div>
     </div>
     <div class="h-[320px] pointer-events-none"></div>
   </form>

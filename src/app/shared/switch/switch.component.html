@@ -1,0 +1,18 @@
+<div class="outline"></div>
+<div class="container">
+  <button class="touch" type="button" adxStateLayerTrigger (click)="onClick()">
+    <div class="handle">
+      @if (icons()) {
+        @switch (value()) {
+          @case (true) {
+            <adx-icon class="icon" size="16" icon="check" />
+          }
+          @case (false) {
+            <adx-icon class="icon" size="16" icon="check_indeterminate_small" />
+          }
+        }
+      }
+    </div>
+    <adx-state-layer />
+  </button>
+</div>
