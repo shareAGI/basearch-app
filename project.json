@@ -10,6 +10,7 @@
       "options": {
         "outputPath": "dist/adx24-app",
         "index": "src/index.html",
+        "baseHref": "index.html",
         "browser": "src/main.ts",
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
