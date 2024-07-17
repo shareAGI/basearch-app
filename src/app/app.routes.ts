@@ -5,10 +5,10 @@ import { Routes } from '@angular/router';
 import { provide } from '@angularity/core';
 import { map, of } from 'rxjs';
 
-import { BLANK_ROUTES } from './blank/blank.routes';
 import { loadChildrenWithAsyncProviders } from './common/router.ext';
 import { Wallpaper } from './core/wallpaper';
 import { WallpaperService } from './core/wallpaper.service';
+import { START_ROUTES } from './start/start.routes';
 
 export const routes: Routes = [
   {
@@ -31,8 +31,8 @@ export const routes: Routes = [
             : of([]),
         children: [
           {
-            path: 'blank',
-            children: BLANK_ROUTES,
+            path: 'start',
+            children: START_ROUTES,
           },
         ],
       }),
