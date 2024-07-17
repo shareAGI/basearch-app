@@ -3,6 +3,7 @@
 
 import {
   ENVIRONMENT_INITIALIZER,
+  EnvironmentProviders,
   inject,
   Injector,
   Provider,
@@ -44,7 +45,7 @@ export function enableRoutesLoaderInjectionContext(children: Routes): Routes {
 }
 
 export function loadChildrenWithAsyncProviders(config: {
-  providers: () => ObservableInput<Provider[]>;
+  providers: () => ObservableInput<Array<Provider | EnvironmentProviders>>;
   children: Routes;
 }): Observable<Routes> {
   const { children, providers } = config;

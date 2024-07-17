@@ -1,6 +1,7 @@
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import {
   ApplicationConfig,
+  mergeApplicationConfig,
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -11,9 +12,10 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
+import { APP_THEME_CONFIG } from './app.theme.config';
 import { enableRoutesLoaderInjectionContext } from './common/router.ext';
 
-export const appConfig: ApplicationConfig = {
+const config: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
     provideClientHydration(),
@@ -25,3 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
   ],
 };
+
+export const APP_CONFIG: ApplicationConfig = mergeApplicationConfig(
+  config,
+  APP_THEME_CONFIG,
+);
