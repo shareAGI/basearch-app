@@ -12,9 +12,19 @@
 </header>
 
 <main class="flex-1 flex justify-center items-center">
-  <div class="flex w-[55dvw] max-w-[680px] flex-col gap-[12px]">
+  <form
+    [formGroup]="form"
+    class="flex w-[55dvw] max-w-[680px] flex-col gap-[12px]"
+    (ngSubmit)="onSubmit()"
+  >
     <adx-search>
-      <input adx-search-control type="search" autofocus placeholder="Search" />
+      <input
+        adx-search-control
+        type="search"
+        autofocus
+        placeholder="Search"
+        [formControl]="form.controls.keywords"
+      />
       <ng-container *adxSearchTrailing>
         <button adx-icon-button>
           <adx-icon icon="mic" />
@@ -25,8 +35,11 @@
       </ng-container>
     </adx-search>
     <div class="flex px-[8px]">
-      <adx-chip-select [options]="searchEngineOptions" />
+      <adx-chip-select
+        [options]="searchEngineOptions"
+        [formControl]="form.controls.engine"
+      />
     </div>
     <div class="h-[320px] pointer-events-none"></div>
-  </div>
+  </form>
 </main>

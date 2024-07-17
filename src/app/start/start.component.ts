@@ -1,5 +1,6 @@
-import { Component, computed } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 import { listen, send } from '../../shared/messenger';
 import { QueryWallpaper, QueryWallpaperResolved } from '../../shared/wallpaper';
@@ -51,6 +52,7 @@ const SEARCH_ENGINES: SearchEngine[] = [
   selector: 'adx-start',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     IconButtonComponent,
     [SearchComponent, SearchTrailingSlot, SearchControlComponent],
     IconComponent,
@@ -62,7 +64,8 @@ const SEARCH_ENGINES: SearchEngine[] = [
   host: { '[style.background-image]': 'backgroundImage()' },
 })
 export class StartComponent {
-  browserOnly = useBrowserOnly();
+  private browserOnly = useBrowserOnly();
+  private formBuilder = inject(FormBuilder).nonNullable;
 
   wallpaper = this.browserOnly(() => {
     send(QueryWallpaper);
@@ -79,4 +82,11 @@ export class StartComponent {
     value: e,
     icon: e.icon,
   }));
+
+  form = this.formBuilder.group({
+    keywords: '',
+    engine: this.searchEngineOptions[0].value,
+  });
+
+  onSubmit(): void {}
 }
