@@ -1,17 +1,29 @@
 <div class="absolute inset-0 bg-scrim opacity-[26%] pointer-events-none"></div>
 
-<main class="w-[55dvw] max-w-[680px]">
-  <adx-search>
-    <input adx-search-control type="search" autofocus placeholder="Search" />
-    <ng-container *adxSearchTrailing>
-      <button adx-icon-button>
-        <adx-icon icon="mic" />
-      </button>
-      <button adx-icon-button>
-        <adx-icon icon="camera" />
-      </button>
-    </ng-container>
-  </adx-search>
-  <div class="h-[320px] pointer-events-none"></div>
+<header class="flex justify-end">
+  <div class="flex gap-[4px]">
+    <button adx-icon-button>
+      <adx-icon icon="refresh" />
+    </button>
+    <button adx-icon-button>
+      <adx-icon icon="settings" />
+    </button>
+  </div>
+</header>
+
+<main class="flex-1 flex justify-center items-center">
+  <div class="w-[55dvw] max-w-[680px]">
+    <adx-search>
+      <input adx-search-control type="search" autofocus placeholder="Search" />
+      <ng-container *adxSearchTrailing>
+        <button adx-icon-button>
+          <adx-icon icon="mic" />
+        </button>
+        <button adx-icon-button>
+          <adx-icon icon="camera" />
+        </button>
+      </ng-container>
+    </adx-search>
+    <div class="h-[320px] pointer-events-none"></div>
+  </div>
 </main>
-s
