@@ -1,1 +1,30 @@
 @import 'tailwindcss/tailwind';
+@import 'normalize.css';
+
+html,
+body {
+  height: 100%;
+}
+
+router-outlet {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: var(--sys-shape-corner-full);
+  background-color: var(--sys-color-secondary);
+}
+
+::selection {
+  background-color: var(--sys-color-secondary-container);
+  color: var(--sys-color-on-secondary-container);
+  text-decoration: underline dotted var(--sys-color-outline);
+}
+
+:autofill {
+  border-radius: var(--sys-shape-corner-extra-small);
+}

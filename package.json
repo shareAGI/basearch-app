@@ -21,7 +21,11 @@
     "@angular/platform-server": "^18.0.0",
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.5",
+    "@angularity/core": "^0.5.1",
+    "@angularity/theming": "^0.5.1",
+    "@material/material-color-utilities": "^0.3.0",
     "express": "^4.18.2",
+    "normalize.css": "^8.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
