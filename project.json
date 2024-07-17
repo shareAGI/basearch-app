@@ -25,11 +25,6 @@
           "includePaths": ["{projectRoot}/src/app"]
         },
         "scripts": [],
-        "server": "src/main.server.ts",
-        "prerender": true,
-        "ssr": {
-          "entry": "server.ts"
-        },
         "webWorkerTsConfig": "tsconfig.worker.json"
       },
       "configurations": {
