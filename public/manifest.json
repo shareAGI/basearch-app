@@ -14,5 +14,6 @@
   ],
   "background": {
     "service_worker": "{background}"
-  }
+  },
+  "permissions": ["tabs", "bookmarks"]
 }

@@ -19,7 +19,7 @@ export function listen<T extends string, P>(
   return new Observable((subscriber) => {
     chrome.runtime.onMessage.addListener((message) => {
       if (message.type !== type.type) return;
-      subscriber.next(message.$payload);
+      subscriber.next(message.payload);
     });
   });
 }
@@ -27,11 +27,17 @@ export function listen<T extends string, P>(
 export function send<T extends string, P>(
   type: MessageType<T, P>,
   payload: NoInfer<P>,
+  tabId?: number,
 ): void;
-export function send<T extends string>(type: MessageType<T, void>): void;
+export function send<T extends string>(
+  type: MessageType<T, void>,
+  tabId?: number,
+): void;
 export function send<T extends string, P>(
   type: MessageType<T, P>,
   payload?: NoInfer<P>,
+  tabId?: number,
 ): void {
-  chrome.runtime.sendMessage({ type: type.type, $payload: payload });
+  if (tabId) chrome.tabs.sendMessage(tabId, { type: type.type, payload });
+  else chrome.runtime.sendMessage({ type: type.type, payload });
 }

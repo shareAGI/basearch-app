@@ -3,12 +3,14 @@
 import {
   combineLatestWith,
   distinctUntilKeyChanged,
+  firstValueFrom,
   shareReplay,
   switchMap,
   tap,
   timer,
 } from 'rxjs';
 
+import { CaptureDom, CaptureDomCompleted } from '../shared/dom';
 import { listen, send } from '../shared/messenger';
 import { QueryWallpaper, QueryWallpaperResolved } from '../shared/wallpaper';
 import { fetchWallpaperFromBing } from './core/bing-wallpaper';
@@ -27,3 +29,12 @@ listen(QueryWallpaper)
   .subscribe(([, wallpaper]) => {
     send(QueryWallpaperResolved, wallpaper);
   });
+
+chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
+  if (!bookmark.url) return;
+  const [tab] = await chrome.tabs.query({ url: bookmark.url });
+  if (!tab) return;
+  setTimeout(() => send(CaptureDom, undefined, tab.id));
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const capture = await firstValueFrom(listen(CaptureDomCompleted));
+});
