@@ -5,5 +5,7 @@
   <ng-content />
 </div>
 <div class="trailing">
-  <ng-content select="[slot=trailing]" />
+  @if (trailing()?.template; as template) {
+    <ng-container *ngTemplateOutlet="template" />
+  }
 </div>

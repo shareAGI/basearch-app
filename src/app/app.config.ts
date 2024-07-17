@@ -11,6 +11,7 @@ import {
   withHashLocation,
 } from '@angular/router';
 
+import { APP_COMPONENTS_CONFIG } from './app.components.config';
 import { routes } from './app.routes';
 import { APP_THEME_CONFIG } from './app.theme.config';
 import { enableRoutesLoaderInjectionContext } from './common/router.ext';
@@ -31,4 +32,5 @@ const config: ApplicationConfig = {
 export const APP_CONFIG: ApplicationConfig = mergeApplicationConfig(
   config,
   APP_THEME_CONFIG,
+  APP_COMPONENTS_CONFIG,
 );

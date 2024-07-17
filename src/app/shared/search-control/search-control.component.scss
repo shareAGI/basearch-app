@@ -1,0 +1,17 @@
+@use 'styles/pristine';
+@use 'styles/typescales';
+
+%host {
+  width: 100%;
+  color: var(--scheme-on-surface);
+  caret-color: var(--scheme-primary);
+  @extend %typescale-inherit;
+  &::placeholder {
+    color: var(--scheme-on-surface-variant);
+  }
+}
+
+:host:is(input) {
+  @include pristine.input();
+  @extend %host;
+}

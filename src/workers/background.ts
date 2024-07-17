@@ -1,12 +1,12 @@
 'is:background';
 
 import {
+  combineLatestWith,
   distinctUntilKeyChanged,
   shareReplay,
   switchMap,
   tap,
   timer,
-  withLatestFrom,
 } from 'rxjs';
 
 import { listen, send } from '../shared/messenger';
@@ -22,7 +22,7 @@ const wallpaper$ = timer(0, 1000 * 60 * 60 * 1).pipe(
 );
 
 listen(QueryWallpaper)
-  .pipe(withLatestFrom(wallpaper$))
+  .pipe(combineLatestWith(wallpaper$))
   .subscribe(([, wallpaper]) => {
     send(QueryWallpaperResolved, wallpaper);
   });

@@ -1,24 +1,35 @@
 import { DOCUMENT } from '@angular/common';
-import { Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import {
   RootElementStylePropertiesThemeTokenRegistry,
   ThemeTokenRegistry,
 } from '@angularity/theming';
 
-const injector = Injector.create({
-  providers: [
-    { provide: DOCUMENT, useValue: window.document },
-    {
-      provide: ThemeTokenRegistry,
-      useClass: RootElementStylePropertiesThemeTokenRegistry,
-    },
-  ],
-});
+@Injectable({ providedIn: 'root' })
+class NullThemeTokenRegistry implements ThemeTokenRegistry {
+  set(name: string, value: string | null): void {}
+  get(name: string): string | null {
+    return null;
+  }
+}
+
+const isBrowser = typeof window !== 'undefined';
+const document = isBrowser && window.document;
+const tokens = isBrowser
+  ? Injector.create({
+      providers: [
+        { provide: DOCUMENT, useValue: window.document },
+        {
+          provide: ThemeTokenRegistry,
+          useClass: RootElementStylePropertiesThemeTokenRegistry,
+        },
+      ],
+    }).get(ThemeTokenRegistry)
+  : new NullThemeTokenRegistry();
 
 const supportsLinearFunctionEasing = checkLinearFunctionEasingSupport();
 
 export function variable(name: string): string {
-  const tokens = injector.get(ThemeTokenRegistry);
   return tokens.get(name) ?? '';
 }
 
@@ -36,7 +47,7 @@ export function easing(name: string): string {
 }
 
 function checkLinearFunctionEasingSupport(): boolean {
-  const document = injector.get(DOCUMENT);
+  if (!document) return false;
   const element = document.createElement('div');
   document.body.appendChild(element);
   element.style.animationTimingFunction = 'linear(0, 1)';
