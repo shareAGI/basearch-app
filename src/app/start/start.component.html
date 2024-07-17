@@ -12,7 +12,7 @@
 </header>
 
 <main class="flex-1 flex justify-center items-center">
-  <div class="w-[55dvw] max-w-[680px]">
+  <div class="flex w-[55dvw] max-w-[680px] flex-col gap-[12px]">
     <adx-search>
       <input adx-search-control type="search" autofocus placeholder="Search" />
       <ng-container *adxSearchTrailing>
@@ -24,6 +24,9 @@
         </button>
       </ng-container>
     </adx-search>
+    <div class="flex px-[8px]">
+      <adx-chip-select [options]="searchEngineOptions" />
+    </div>
     <div class="h-[320px] pointer-events-none"></div>
   </div>
 </main>

@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.0.0",
+    "@angular/animations": "^18.1.0",
     "@angular/cdk": "^18.1.0",
     "@angular/common": "^18.0.0",
     "@angular/compiler": "^18.0.0",
@@ -23,6 +23,7 @@
     "@angular/router": "^18.0.0",
     "@angular/ssr": "^18.0.5",
     "@angularity/core": "^0.5.1",
+    "@angularity/forms": "^0.5.1",
     "@angularity/theming": "^0.5.1",
     "@angularity/theming-material": "^0.5.1",
     "@material/material-color-utilities": "^0.3.0",

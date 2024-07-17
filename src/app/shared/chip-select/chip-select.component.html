@@ -1,0 +1,12 @@
+<adx-chip-group>
+  @for (option of options(); track option.value) {
+    <button
+      adx-chip
+      [selected]="(value$ | async) === option.value"
+      (click)="onSelect(option.value)"
+      [icon]="option.icon"
+    >
+      {{ option.label }}
+    </button>
+  }
+</adx-chip-group>

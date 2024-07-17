@@ -34,16 +34,16 @@ export function variable(name: string): string {
 }
 
 export function duration(name: string): string {
-  return variable(`sys-motion-duration-${name}`);
+  return variable(`motion-duration-${name}`);
 }
 export function easing(name: string): string {
   // TODO: remove this once `linear()` easing is supported in all browsers
   if (name === 'emphasized') {
     if (!supportsLinearFunctionEasing)
-      return variable(`sys-motion-easing-emphasized`);
-    return variable(`sys-motion-easing-emphasized-experimental`);
+      return variable(`motion-easing-emphasized`);
+    return variable(`motion-easing-emphasized-experimental`);
   }
-  return variable(`sys-motion-easing-${name}`);
+  return variable(`motion-easing-${name}`);
 }
 
 function checkLinearFunctionEasingSupport(): boolean {

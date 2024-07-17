@@ -5,6 +5,7 @@ import {
   provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideRouter,
   withComponentInputBinding,
@@ -20,6 +21,7 @@ const config: ApplicationConfig = {
   providers: [
     provideExperimentalZonelessChangeDetection(),
     provideClientHydration(),
+    provideAnimations(),
     provideRouter(
       enableRoutesLoaderInjectionContext(routes),
       withComponentInputBinding(),

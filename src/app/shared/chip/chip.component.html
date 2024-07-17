@@ -1,0 +1,7 @@
+<adx-state-layer />
+@if (selected ? 'check' : icon; as icon) {
+  <adx-icon class="icon" *adxRerender="icon" [icon]="icon" [size]="18" />
+}
+<div class="content">
+  <ng-content />
+</div>

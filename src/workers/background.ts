@@ -20,6 +20,7 @@ const wallpaper$ = timer(0, 1000 * 60 * 60 * 1).pipe(
   tap((wallpaper) => httpClient.get(wallpaper.url)), // Preload wallpaper, but does it really work?
   shareReplay(1),
 );
+wallpaper$.subscribe();
 
 listen(QueryWallpaper)
   .pipe(combineLatestWith(wallpaper$))

@@ -1,0 +1,58 @@
+@use 'styles/typescales';
+@use 'styles/pristine';
+
+:host {
+  --chip-bg-color: initial;
+  --chip-icon-color: var(--scheme-primary);
+  --chip-content-color: var(--scheme-on-surface-variant);
+  --chip-border: 1px solid var(--scheme-outline);
+}
+:host.selected {
+  --chip-bg-color: var(--scheme-secondary-container);
+  --chip-icon-color: var(--scheme-on-secondary-container);
+  --chip-content-color: var(--scheme-on-secondary-container);
+  --chip-border: 0 solid var(--chip-bg-color);
+}
+:host:disabled {
+  --chip-bg-color: initial;
+  --chip-icon-color: var(--scheme-on-disabled);
+  --chip-content-color: var(--scheme-on-disabled);
+  --chip-border: 1px solid var(--scheme-disabled);
+}
+
+:host {
+  @include pristine.button();
+  position: relative;
+  display: inline-flex;
+  height: 32px;
+  max-width: 100%;
+  padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--chip-bg-color);
+  border-radius: var(--shape-corner-small);
+  border: var(--chip-border);
+  transition-property: background-color, border-color;
+  transition-duration: var(--motion-duration-short2);
+  transition-timing-function: var(--motion-easing-standard);
+}
+
+.icon {
+  color: var(--chip-icon-color);
+}
+
+.content {
+  padding: 0 8px;
+  color: var(--chip-content-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @extend %typescale-label-large;
+}
+
+:host:is(button) {
+  user-select: none;
+  &:enabled {
+    cursor: pointer;
+  }
+}
