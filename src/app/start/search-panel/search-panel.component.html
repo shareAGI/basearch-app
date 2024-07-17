@@ -14,4 +14,15 @@
 
 <div class="border-b-[1px] border-b-outline-variant"></div>
 
-<div class="flex-1 grid grid-cols-3 p-[16px]"></div>
+<div
+  class="flex-1 min-h-0 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] auto-rows-min p-[16px] gap-[16px] overflow-auto"
+>
+  @for (card of cards; track card.url) {
+    <adx-search-result-card
+      [headline]="card.headline"
+      [url]="card.url"
+      [cover]="card.cover"
+      [summary]="card.summary"
+    />
+  }
+</div>

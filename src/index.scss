@@ -1,3 +1,5 @@
+@use 'styles/pristine';
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/utilities';
 @import 'normalize.css';
@@ -67,6 +69,12 @@ router-outlet {
 ::view-transition-group(*) {
   animation-timing-function: var(--motion-easing-emphasized);
   animation-duration: var(--motion-duration-long1);
+}
+
+@layer base {
+  button {
+    @include pristine.button();
+  }
 }
 
 @layer utilities {

@@ -1,5 +1,5 @@
 :host {
-  @apply block w-[55dvw] max-w-[800px] h-[50dvh] bg-surface-container-high rounded-extra-large [view-transition-name:search-container];
+  @apply flex flex-col w-[68dvw] max-w-[968px] h-[68dvh] items-stretch bg-surface-container-high rounded-large [view-transition-name:search-container];
 }
 
 adx-search ::ng-deep {
