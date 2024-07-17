@@ -10,6 +10,7 @@ import {
   provideRouter,
   withComponentInputBinding,
   withHashLocation,
+  withViewTransitions,
 } from '@angular/router';
 
 import { APP_COMPONENTS_CONFIG } from './app.components.config';
@@ -26,6 +27,7 @@ const config: ApplicationConfig = {
       enableRoutesLoaderInjectionContext(routes),
       withComponentInputBinding(),
       withHashLocation(),
+      withViewTransitions(),
     ),
     provideHttpClient(withFetch()),
   ],

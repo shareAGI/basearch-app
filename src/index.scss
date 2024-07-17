@@ -64,6 +64,11 @@ router-outlet {
   --motion-duration-long4: 600ms;
 }
 
+::view-transition-group(*) {
+  animation-timing-function: var(--motion-easing-emphasized);
+  animation-duration: var(--motion-duration-long1);
+}
+
 @layer utilities {
   @mixin level($name) {
     font-family: var(--typescale-#{$name}-font);

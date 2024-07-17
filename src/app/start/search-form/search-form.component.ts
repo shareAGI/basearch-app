@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { match } from 'ts-pattern';
 
 import { ChipSelectComponent } from '../../shared/chip-select/chip-select.component';
@@ -31,6 +32,7 @@ type BookmarkSearchMode = 'locate' | 'review';
   styleUrl: './search-form.component.scss',
 })
 export class SearchFormComponent {
+  private router = inject(Router);
   private formBuilder = inject(FormBuilder).nonNullable;
 
   searchSourceSwitchValue = signal(false);
@@ -82,5 +84,6 @@ export class SearchFormComponent {
   onBookmarkSearchSubmit(): void {
     const { keywords } = this.form.value;
     if (!keywords) throw new Error('Invalid form state');
+    this.router.navigate(['/start/search', { keywords }]);
   }
 }
