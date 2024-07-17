@@ -1,10 +1,9 @@
 import { Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { from } from 'rxjs';
 
-import { listen, send } from '../../shared/messenger';
-import { QueryWallpaper, QueryWallpaperResolved } from '../../shared/wallpaper';
-import { useBrowserOnly } from '../common/platform-browser';
+import { WallpaperLoader } from '../core/wallpaper-loader.service';
 import { ChipSelectComponent } from '../shared/chip-select/chip-select.component';
 import { IconComponent } from '../shared/icon/icon.component';
 import { provideIcons } from '../shared/icon/icons';
@@ -16,35 +15,7 @@ import {
 } from '../shared/search/search.component';
 import { SearchControlComponent } from '../shared/search-control/search-control.component';
 import { SwitchComponent } from '../shared/switch/switch.component';
-
-interface SearchEngine {
-  name: string;
-  scheme: string;
-  icon: string;
-}
-
-const SEARCH_ENGINES: SearchEngine[] = [
-  {
-    name: 'Google',
-    scheme: 'https://www.google.com/search?query=@',
-    icon: 'iGoogle',
-  },
-  {
-    name: 'Bing',
-    scheme: 'https://bing.com/search?q=@',
-    icon: 'iMicrosoft',
-  },
-  {
-    name: 'YouTube',
-    scheme: 'https://www.youtube.com/results?search_query=@',
-    icon: 'iYouTube',
-  },
-  {
-    name: 'GitHub',
-    scheme: 'https://github.com/search?q=@',
-    icon: 'iGitHub',
-  },
-];
+import { SEARCH_ENGINES } from './search-engines';
 
 @Component({
   selector: 'adx-start',
@@ -63,13 +34,10 @@ const SEARCH_ENGINES: SearchEngine[] = [
   host: { '[style.background-image]': 'backgroundImage()' },
 })
 export class StartComponent {
-  private browserOnly = useBrowserOnly();
   private formBuilder = inject(FormBuilder).nonNullable;
+  private wallpaperLoader = inject(WallpaperLoader);
 
-  wallpaper = this.browserOnly(() => {
-    send(QueryWallpaper);
-    return toSignal(listen(QueryWallpaperResolved));
-  });
+  wallpaper = toSignal(from(this.wallpaperLoader.load()));
 
   backgroundImage = computed(() => {
     const url = this.wallpaper && this.wallpaper()?.url;
@@ -87,5 +55,11 @@ export class StartComponent {
     engine: this.searchEngineOptions[0].value,
   });
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    const { keywords, engine } = this.form.value;
+    if (!keywords || !engine) throw new Error('Invalid form state');
+    const { scheme } = engine;
+    const url = scheme.replace('@', encodeURIComponent(keywords));
+    window.open(url, '_self');
+  }
 }
