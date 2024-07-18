@@ -6,7 +6,10 @@
     adxCaptureFocus
   />
   <ng-container *adxSearchTrailing>
-    <button adx-icon-button routerLink="/start">
+    <button
+      adx-icon-button
+      [routerLink]="['/start', { query: queryControl().value }]"
+    >
       <adx-icon icon="close" />
     </button>
   </ng-container>

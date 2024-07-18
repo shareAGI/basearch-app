@@ -1,9 +1,9 @@
 <form
-  [formGroup]="form"
+  [formGroup]="form()"
   class="flex flex-col gap-[12px]"
   (ngSubmit)="onSubmit()"
 >
-  @let controls = form.controls;
+  @let controls = form().controls;
   @let searchControlConfig =
     searchSource() === 'internet'
       ? {
@@ -24,7 +24,7 @@
       adx-search-control
       type="search"
       [placeholder]="searchControlConfig.placeholder"
-      [formControl]="controls.keywords"
+      [formControl]="controls.query"
       adxCaptureFocus
     />
     <ng-container *adxSearchTrailing>

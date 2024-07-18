@@ -7,7 +7,14 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { match } from 'ts-pattern';
@@ -109,6 +116,8 @@ export class SearchFormComponent {
   private router = inject(Router);
   private formBuilder = inject(FormBuilder).nonNullable;
 
+  initialQuery = input<string | undefined>(undefined, { alias: 'query' });
+
   searchSourceSwitchValue = signal(this.readLocalSearchSourceSwitchValue());
   searchSource = computed<SearchSource>(() =>
     this.searchSourceSwitchValue() ? 'bookmarks' : 'internet',
@@ -133,11 +142,13 @@ export class SearchFormComponent {
     },
   ];
 
-  form = this.formBuilder.group({
-    keywords: '',
-    engine: this.internetSearchEngineOptions[0].value,
-    mode: 'locate' as BookmarkSearchMode,
-  });
+  form = computed(() =>
+    this.formBuilder.group({
+      query: this.initialQuery(),
+      engine: this.internetSearchEngineOptions[0].value,
+      mode: 'locate' as BookmarkSearchMode,
+    }),
+  );
 
   constructor() {
     effect(() => {
@@ -154,17 +165,17 @@ export class SearchFormComponent {
   }
 
   onInternetSearchSubmit(): void {
-    const { keywords, engine } = this.form.value;
-    if (!keywords || !engine) throw new Error('Invalid form state');
+    const { query, engine } = this.form().value;
+    if (!query || !engine) throw new Error('Invalid form state');
     const { scheme } = engine;
-    const url = scheme.replace('@', encodeURIComponent(keywords));
+    const url = scheme.replace('@', encodeURIComponent(query));
     window.open(url, '_self');
   }
 
   onBookmarkSearchSubmit(): void {
-    const { keywords } = this.form.value;
-    if (!keywords) throw new Error('Invalid form state');
-    this.router.navigate(['/start/search', { query: keywords }]);
+    const { query } = this.form().value;
+    if (!query) throw new Error('Invalid form state');
+    this.router.navigate(['/start/search', { query }]);
   }
 
   private readLocalSearchSourceSwitchValue(): boolean {
