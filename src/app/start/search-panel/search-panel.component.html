@@ -14,22 +14,46 @@
     </button>
   </ng-container>
 </adx-search>
-
 <div class="border-b-[1px] border-b-outline-variant"></div>
 
+@let columnPadding = 24;
+@let columnWidth = columnSizer.boundingBox().width;
 <div
-  class="relative flex-1 min-h-0 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] auto-rows-min p-[16px] gap-[16px] overflow-auto"
+  class="relative flex-1 min-h-0 overflow-auto"
+  [style.padding.px]="columnPadding"
+  [style.padding-bottom]="0"
 >
-  @if (cards(); as cards) {
-    @for (card of cards; track card.url) {
-      <adx-search-result-card
-        [headline]="card.headline"
-        [url]="card.url"
-        [cover]="card.cover"
-        [summary]="card.summary"
-      />
+  <ngx-masonry
+    [options]="{
+      columnWidth: '.sizer',
+      gutter: columnPadding,
+      resize: false,
+    }"
+  >
+    <div
+      class="absolute inset-0 grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] invisible pointer-events-none"
+      [style.gap.px]="columnPadding"
+    >
+      <div class="sizer" adxBoundingBox #columnSizer="adxBoundingBox"></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    @if (cards(); as cards) {
+      @for (card of cards; track card.url) {
+        <adx-search-result-card
+          ngxMasonryItem
+          [headline]="card.headline"
+          [url]="card.url"
+          [coverUrl]="card.cover"
+          [coverRatio]="card.coverRatio"
+          [summary]="card.summary"
+          [style.width.px]="columnWidth"
+          [style.margin-bottom.px]="columnPadding"
+        />
+      }
+    } @else {
+      <adx-loading-overlay />
     }
-  } @else {
-    <adx-loading-overlay />
-  }
+  </ngx-masonry>
 </div>

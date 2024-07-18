@@ -14,7 +14,8 @@ import { Component, computed, input, signal } from '@angular/core';
 export class SearchResultCardComponent {
   headline = input.required<string>();
   url = input.required<string>();
-  cover = input<string>();
+  coverUrl = input<string>();
+  coverRatio = input<number>();
   summary = input<string>();
 
   urlPrettified = computed(() => {

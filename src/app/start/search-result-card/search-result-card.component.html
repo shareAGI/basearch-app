@@ -1,8 +1,8 @@
 <a [href]="url()" target="_blank">
-  @let coverUrl = cover() ? 'url(' + cover + ')' : undefined;
   <div
-    class="bg-secondary-container bg-cover bg-center aspect-[3/2] rounded-medium"
-    [style.background-image]="coverUrl"
+    class="bg-secondary-container bg-cover bg-center first-line: rounded-medium"
+    [style.background-image]="coverUrl() && 'url(' + coverUrl() + ')'"
+    [style.aspect-ratio]="coverRatio()"
   ></div>
 </a>
 
