@@ -28,6 +28,9 @@ export class SearchDetailComponent {
   imageUrl = input.required<string>();
 
   onCloseClick(): void {
-    this.router.navigate([{}], { relativeTo: this.route });
+    this.router.navigate([{}], {
+      relativeTo: this.route,
+      queryParamsHandling: 'preserve',
+    });
   }
 }

@@ -82,7 +82,10 @@ export class SearchPanelComponent {
     this.futureSelectionIndex.set(index);
     this.router.navigate(
       [{ selected: index }], //
-      { relativeTo: this.route },
+      {
+        relativeTo: this.route,
+        queryParams: { query: this.queryControl().value },
+      },
     );
   };
 

@@ -9,7 +9,8 @@
     <ng-container *bsSearchTrailing>
       <button
         bs-icon-button
-        [routerLink]="['/start', { query: queryControl().value }]"
+        [routerLink]="['/start']"
+        [queryParams]="{ query: queryControl().value }"
       >
         <bs-icon icon="close" />
       </button>

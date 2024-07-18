@@ -175,7 +175,7 @@ export class SearchFormComponent {
   onBookmarkSearchSubmit(): void {
     const { query } = this.form().value;
     if (!query) throw new Error('Invalid form state');
-    this.router.navigate(['/start/search', { query }]);
+    this.router.navigate(['/start/search'], { queryParams: { query } });
   }
 
   private readLocalSearchSourceSwitchValue(): boolean {
