@@ -94,6 +94,16 @@ router-outlet {
 }
 
 @layer utilities {
+  .scroll-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@layer utilities {
   @mixin level($name) {
     font-family: var(--typescale-#{$name}-font);
     font-weight: var(--typescale-#{$name}-weight);

@@ -1,33 +1,13 @@
-<a [href]="url()" target="_blank">
-  <div
-    class="bg-secondary-container bg-cover bg-center first-line: rounded-medium"
-    [style.background-image]="coverUrl() && 'url(' + coverUrl() + ')'"
-    [style.aspect-ratio]="coverRatio()"
-  ></div>
-</a>
-
-<div class="invisible flex flex-col py-[8px] px-[12px] gap-[4px] items-stretch">
-  <div class="title-medium">{{ headline() }}</div>
-  <div class="label-large text-nowrap text-ellipsis overflow-hidden">
-    {{ urlPrettified() }}
-  </div>
-</div>
-
-<button
-  class="absolute bottom-0 left-0 w-full flex flex-col py-[8px] px-[12px] gap-[4px] items-stretch bg-[inherit] group-[.expanded]:h-full"
-  (click)="expanded.set(!expanded())"
->
+<div
+  class="bg-secondary-container bg-cover bg-center first-line: rounded-medium"
+  [style.background-image]="coverUrl() && 'url(' + coverUrl() + ')'"
+  [style.aspect-ratio]="coverRatio()"
+></div>
+<div class="px-[12px] py-[8px] gap-[4px]">
   <div class="text-on-surface title-medium">{{ headline() }}</div>
-  @if (expanded()) {
-    <div
-      class="flex-1 min-h-0 text-on-surface-variant body-medium overflow-auto"
-    >
-      {{ summary() ?? 'No summary available' }}
-    </div>
-  }
   <div
     class="text-on-surface-variant label-large text-nowrap text-ellipsis overflow-hidden"
   >
     {{ urlPrettified() }}
   </div>
-</button>
+</div>

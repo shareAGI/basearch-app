@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, computed, inject, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -5,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { startWith, switchMap } from 'rxjs';
 
+import { duration, easing } from '../../core/animations';
 import { BookmarkService } from '../../core/bookmark.service';
 import { BoundingBoxDirective } from '../../shared/bounding-box.directive';
 import { CaptureFocusDirective } from '../../shared/capture-focus.directive';
@@ -18,6 +20,16 @@ import {
 } from '../../shared/search/search.component';
 import { SearchControlComponent } from '../../shared/search-control/search-control.component';
 import { SearchResultCardComponent } from '../search-result-card/search-result-card.component';
+
+const SEARCH_RESULT_CARD_ANIMATIONS = {
+  show: [
+    style({ opacity: 0, transform: 'scale(0.9)' }),
+    animate(
+      `${duration('medium1')} ${easing('emphasized-decelerate')}`,
+      style({ opacity: 1, transform: 'scale(1)' }),
+    ),
+  ],
+};
 
 @Component({
   selector: 'adx-search-panel',
@@ -36,6 +48,16 @@ import { SearchResultCardComponent } from '../search-result-card/search-result-c
   ],
   templateUrl: './search-panel.component.html',
   styleUrl: './search-panel.component.scss',
+  animations: [
+    trigger('SearchResults', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(
+          `${duration('long2')} 500ms ${easing('emphasized-decelerate')}`,
+        ),
+      ]),
+    ]),
+  ],
 })
 export class SearchPanelComponent {
   private formBuilder = inject(FormBuilder).nonNullable;
@@ -50,6 +72,7 @@ export class SearchPanelComponent {
   );
   searchResults = toSignal(this.searchResults$);
 
+  cardAnimations = SEARCH_RESULT_CARD_ANIMATIONS;
   cards = computed(
     () => [
       {
@@ -78,6 +101,20 @@ export class SearchPanelComponent {
         url: 'https://domain.com/asdfasdfasdf.html',
         cover: 'https://domain.com/asdfasdfasdf.jpg',
         coverRatio: 4 / 7,
+        summary: 'adsfasfasdasdf',
+      },
+      {
+        headline: 'Headline',
+        url: 'https://domain.com/asdfasdfasdf.html',
+        cover: 'https://domain.com/asdfasdfasdf.jpg',
+        coverRatio: 4 / 5,
+        summary: 'adsfasfasdasdf',
+      },
+      {
+        headline: 'Headline',
+        url: 'https://domain.com/asdfasdfasdf.html',
+        cover: 'https://domain.com/asdfasdfasdf.jpg',
+        coverRatio: 4 / 6,
         summary: 'adsfasfasdasdf',
       },
     ],
