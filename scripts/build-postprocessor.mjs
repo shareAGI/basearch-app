@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { globIterate } from 'glob';
 
-const DIST = 'dist/basesearch/browser';
+const DIST = 'dist/basearch/browser';
 
 main();
 

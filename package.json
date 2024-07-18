@@ -1,5 +1,5 @@
 {
-  "name": "basesearch",
+  "name": "basearch",
   "version": "0.0.0",
   "scripts": {
     "prepare": "husky install",
