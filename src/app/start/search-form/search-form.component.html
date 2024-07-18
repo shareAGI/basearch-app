@@ -33,33 +33,26 @@
       </ng-container>
     </adx-search>
   </div>
-  <div class="flex px-[4px]">
-    @switch (searchSource()) {
-      @case ('internet') {
-        <adx-chip-select
-          class="flex-1 px-[4px]"
-          [options]="internetSearchEngineOptions"
-          [formControl]="controls.engine"
-        />
-      }
-      @case ('bookmarks') {
-        <adx-chip-select
-          class="flex-1 px-[4px]"
-          [options]="bookmarkSearchModeOptions"
-          [formControl]="controls.mode"
-        />
-      }
-    }
+  <div class="flex px-[4px] gap-[4px]">
+    @let selectConfig =
+      searchSource() === 'internet'
+        ? { options: internetSearchEngineOptions, control: controls.engine }
+        : { options: bookmarkSearchModeOptions, control: controls.mode };
+    <adx-chip-select
+      *adxRerender="selectConfig"
+      class="flex-1 min-w-0 px-[4px]"
+      scrollable
+      [options]="selectConfig.options"
+      [formControl]="selectConfig.control"
+      @SearchChips
+    />
     <div class="flex gap-[12px] items-end">
       <span class="text-on-surface-variant label-large">
-        @switch (searchSource()) {
-          @case ('internet') {
-            Or switch to bookmark search
-          }
-          @case ('bookmarks') {
-            Or back to explore the internet
-          }
-        }
+        @let instruction =
+          searchSource() === 'internet'
+            ? 'Or switch to bookmark search'
+            : 'Or back to explore the internet';
+        {{ instruction }}
       </span>
       <adx-switch [icons]="true" [(value)]="searchSourceSwitchValue" />
     </div>

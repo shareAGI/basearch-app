@@ -11,5 +11,6 @@ import { StateLayerTriggerDirective } from '../state-layer/state-layer-trigger.d
   styleUrls: ['./icon-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [StateLayerTriggerDirective],
+  host: { type: 'button' },
 })
 export class IconButtonComponent {}

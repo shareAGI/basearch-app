@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -22,6 +23,7 @@ import { ChipGroupComponent } from '../chip-group/chip-group.component';
   host: { '(click)': 'touched$.emit()' },
 })
 export class ChipSelectComponent extends SimpleComponentValueAccessorHost<unknown> {
+  scrollable = input(false, { transform: booleanAttribute });
   options = input.required<ChipSelectOption[]>();
   touched$ = new EventEmitter();
   onSelect(value: unknown): void {

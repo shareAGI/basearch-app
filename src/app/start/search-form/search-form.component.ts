@@ -1,11 +1,21 @@
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { match } from 'ts-pattern';
 
+import { duration, easing } from '../../core/animations';
 import { ChipSelectComponent } from '../../shared/chip-select/chip-select.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IconButtonComponent } from '../../shared/icon-button/icon-button.component';
+import { RerenderDirective } from '../../shared/rerender.directive';
 import {
   SearchComponent,
   SearchTrailingSlot,
@@ -27,9 +37,24 @@ type BookmarkSearchMode = 'locate' | 'review';
     IconComponent,
     ChipSelectComponent,
     SwitchComponent,
+    RerenderDirective,
   ],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.scss',
+  animations: [
+    trigger('SearchChips', [
+      transition(':enter', [
+        query('[adx-chip]', [
+          style({ opacity: 0, transform: 'translateX(-8px)' }),
+          stagger(50, [
+            animate(
+              `${duration('medium1')} ${easing('emphasized-decelerate')}`,
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class SearchFormComponent {
   private router = inject(Router);
