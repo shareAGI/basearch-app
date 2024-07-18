@@ -11,9 +11,14 @@ export async function fetchWallpaperFromBing(): Promise<Wallpaper> {
   const r: BingWallpaperResponse = await httpClient
     .get('https://bing.biturl.top/')
     .then((r) => r.data);
-  return {
-    url: r.url,
-    copyright: r.copyright,
-    copyrightUrl: r.copyright_link,
-  };
+  const srcUrl = r.url;
+  const data = await httpClient
+    .get(srcUrl, { responseType: 'blob' })
+    .then((r) => r.data);
+  const dataUrl = await new Promise<string>((resolve) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.readAsDataURL(data);
+  });
+  return { srcUrl, dataUrl };
 }

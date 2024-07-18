@@ -2,7 +2,7 @@
 
 import {
   combineLatestWith,
-  distinctUntilKeyChanged,
+  distinctUntilChanged,
   firstValueFrom,
   shareReplay,
   switchMap,
@@ -20,8 +20,8 @@ import { httpClient } from './core/http-client';
 
 const wallpaper$ = timer(0, 1000 * 60 * 60 * 1).pipe(
   switchMap(() => fetchWallpaperFromBing()),
-  distinctUntilKeyChanged('url'),
-  tap((wallpaper) => httpClient.get(wallpaper.url)), // Preload wallpaper, but does it really work?
+  distinctUntilChanged(),
+  tap((wallpaper) => httpClient.get(wallpaper.srcUrl)), // Preload wallpaper, but does it really work?
   shareReplay(1),
 );
 wallpaper$.subscribe();

@@ -20,11 +20,11 @@ import {
   MaterialDynamicColors,
 } from '@material/material-color-utilities';
 
+import { Wallpaper } from '../shared/wallpaper';
 import { APP_THEME_TOKENS } from './app.theme.tokens';
 import { APP_THEME_TYPESCALES } from './app.theme.typescales';
 import { useBrowserOnly } from './common/platform-browser';
 import { extractSeedColorsFromImageUrl } from './common/theming';
-import { WallpaperLoader } from './core/wallpaper-loader.service';
 
 @Injectable()
 export class AppSchemeBuilder extends SchemeBuilder {
@@ -49,15 +49,10 @@ export const APP_THEME_CONFIG: ApplicationConfig = {
   providers: [
     provide({ token: SchemeBuilder, useClass: AppSchemeBuilder }),
     provideTheme(
-      async (
-        browserOnly = useBrowserOnly(),
-        wallpaperLoader = inject(WallpaperLoader),
-      ) => {
+      async (browserOnly = useBrowserOnly(), wallpaper = inject(Wallpaper)) => {
         const config = await browserOnly(async () => {
-          const wallpaper = await wallpaperLoader.load();
-          const [seedColor] = await extractSeedColorsFromImageUrl(
-            wallpaper.url,
-          );
+          const url = wallpaper.srcUrl;
+          const [seedColor] = await extractSeedColorsFromImageUrl(url);
           return {
             scheme: withThemeBuilder(SchemeBuilder, {
               primary: hexFromArgb(seedColor),

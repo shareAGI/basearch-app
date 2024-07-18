@@ -1,10 +1,7 @@
-import { Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { from } from 'rxjs';
 
-import { WallpaperLoader } from '../core/wallpaper-loader.service';
 import { ChipSelectComponent } from '../shared/chip-select/chip-select.component';
 import { IconComponent } from '../shared/icon/icon.component';
 import { provideIcons } from '../shared/icon/icons';
@@ -32,14 +29,5 @@ import { SwitchComponent } from '../shared/switch/switch.component';
   providers: [provideIcons({ iGoogle, iMicrosoft, iGitHub, iYouTube })],
   templateUrl: './start.component.html',
   styleUrl: './start.component.scss',
-  host: { '[style.background-image]': 'backgroundImage()' },
 })
-export class StartComponent {
-  private wallpaperLoader = inject(WallpaperLoader);
-
-  wallpaper = toSignal(from(this.wallpaperLoader.load()));
-  backgroundImage = computed(() => {
-    const url = this.wallpaper && this.wallpaper()?.url;
-    return `url(${url})`;
-  });
-}
+export class StartComponent {}

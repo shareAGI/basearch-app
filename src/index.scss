@@ -11,6 +11,15 @@ body {
   height: 100%;
 }
 
+body {
+  @media (prefers-color-scheme: dark) {
+    background: #3b3b3b;
+  }
+  @media (prefers-color-scheme: light) {
+    background: #e3e3e3;
+  }
+}
+
 router-outlet {
   display: none;
 }
