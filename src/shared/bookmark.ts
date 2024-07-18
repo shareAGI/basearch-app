@@ -1,5 +1,6 @@
-import { $type } from '@angularity/core';
-
-import { define } from './messenger';
-
-export const BookmarkCreated = define('BookmarkCreated', $type<string>());
+export interface Bookmark {
+  url: string;
+  title: string;
+  document: string;
+  screenshot: string;
+}

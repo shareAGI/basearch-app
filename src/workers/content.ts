@@ -10,6 +10,18 @@ import { listen, send } from '../shared/messenger';
  */
 async function captureScreenshot(): Promise<string> {
   const canvas = await canvasFromDom(document.body);
+  const context = canvas.getContext('2d');
+  if (!context) throw new Error('Context not available');
+  const image = new Image();
+  await new Promise((resolve) => {
+    image.onload = resolve;
+    image.src = canvas.toDataURL();
+  });
+  const scale = 600 / canvas.width;
+  canvas.width = 600;
+  canvas.height = 400;
+  context.scale(scale, scale);
+  context.drawImage(image, 0, 0);
   return canvas.toDataURL();
 }
 
