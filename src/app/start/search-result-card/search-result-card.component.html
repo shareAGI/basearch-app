@@ -1,7 +1,8 @@
+@let ratio = coverRatio();
 <div
-  class="bg-secondary-container bg-cover bg-center rounded-medium"
+  class="bg-secondary-container bg-contain rounded-medium"
   [style.background-image]="coverUrl() && 'url(' + coverUrl() + ')'"
-  [style.aspect-ratio]="coverRatio()"
+  [style.aspect-ratio]="ratio && 1 / ratio"
 ></div>
 <div class="px-[12px] py-[8px] gap-[4px]">
   <div class="text-on-surface title-medium">{{ headline() }}</div>

@@ -55,6 +55,8 @@ import { SearchResultCardComponent } from '../search-result-card/search-result-c
   ],
 })
 export class SearchPanelComponent {
+  bookmarkIsDetailed = bookmarkIsDetailed;
+
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder).nonNullable;

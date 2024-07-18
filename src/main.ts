@@ -16,13 +16,18 @@ import {
 } from './shared/wallpaper';
 
 class WallpaperLoader {
-  private loaded?: Wallpaper = this.readLocalWallpaper();
+  private cached?: Wallpaper = this.readLocalWallpaper();
 
   async load(): Promise<Wallpaper> {
-    if (this.loaded) return this.loaded;
+    if (!this.cached) return this.loadAndSave();
+    this.loadAndSave();
+    return this.cached;
+  }
+
+  async loadAndSave(): Promise<Wallpaper> {
     setTimeout(() => send(QueryWallpaper));
     const wallpaper = await firstValueFrom(listen(QueryWallpaperResolved));
-    this.loaded = wallpaper;
+    this.cached = wallpaper;
     this.saveLocalWallpaper(wallpaper);
     return wallpaper;
   }

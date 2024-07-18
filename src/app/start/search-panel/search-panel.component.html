@@ -60,13 +60,14 @@
     }
   </div>
 
-  @if (selectedIndex()) {
+  @if (selectedIndex() && selected(); as bookmark) {
+    @let bookmarkDetailed = bookmarkIsDetailed(bookmark) ? bookmark : undefined;
     <bs-search-detail
       class="absolute inset-0"
-      headline="Headline"
-      url="https://example.com"
-      imageUrl="adsfsad"
-      description="asdfsadf"
+      [headline]="bookmark.title"
+      [url]="bookmark.url"
+      [imageUrl]="bookmarkDetailed?.imageUrl ?? ''"
+      [description]="bookmarkDetailed?.summary ?? ''"
     />
   }
 </bs-search-container>

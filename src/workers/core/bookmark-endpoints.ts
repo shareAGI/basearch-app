@@ -30,7 +30,9 @@ function bookmarkRecordIsDetailed(
 }
 
 export async function fetchBookmarks(): Promise<Bookmark[]> {
-  const records: BookmarkRecord[] = await httpClient.get('api:bookmarks');
+  const records: BookmarkRecord[] = await httpClient
+    .get('api:bookmarks')
+    .then((r) => r.data);
   return records.map(
     (r): Bookmark => ({
       url: r.url,
@@ -43,10 +45,9 @@ export async function fetchBookmarks(): Promise<Bookmark[]> {
 export async function searchBookmarks(
   query: string,
 ): Promise<(Bookmark | DetailedBookmark)[]> {
-  const records: (BookmarkRecord | DetailedBookmarkRecord)[] =
-    await httpClient.get('api:bookmarks', {
-      params: { query, detailed: true },
-    });
+  const records: (BookmarkRecord | DetailedBookmarkRecord)[] = await httpClient
+    .get('api:bookmarks', { params: { query, detailed: true } })
+    .then((r) => r.data);
   return records.map((r): Bookmark | DetailedBookmark => ({
     url: r.url,
     title: r.title,
@@ -54,6 +55,7 @@ export async function searchBookmarks(
     ...(bookmarkRecordIsDetailed(r) && {
       summary: r.summary,
       imageUrl: r.cover_url,
+      imageRatio: r.aspect_ratio,
     }),
   }));
 }
