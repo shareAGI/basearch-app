@@ -66,6 +66,13 @@ router-outlet {
   --motion-duration-long4: 600ms;
 }
 
+::view-transition-old(root) {
+  display: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+
 ::view-transition-group(*) {
   animation-timing-function: var(--motion-easing-emphasized);
   animation-duration: var(--motion-duration-medium2);

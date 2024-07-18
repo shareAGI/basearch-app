@@ -1,5 +1,6 @@
 import {
   animate,
+  group,
   query,
   stagger,
   style,
@@ -41,7 +42,47 @@ type BookmarkSearchMode = 'locate' | 'review';
   ],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.scss',
+  host: { '[@SearchForm]': '' },
   animations: [
+    trigger('SearchForm', [
+      transition(':enter', [
+        group([
+          query('@SearchControl', [
+            style({ width: '56px' }),
+            animate(
+              `${duration('medium2')} ${easing('emphasized-decelerate')}`,
+            ),
+          ]),
+          query(
+            '@SearchControl > *, @SearchChips [adx-chip], .switch-actions > *',
+            [style({ opacity: 0, transform: 'translateX(-8px)' })],
+          ),
+          query(
+            '@SearchControl > *, @SearchChips [adx-chip], .switch-actions > *',
+            [
+              stagger(50, [
+                animate(
+                  `${duration('medium1')} ${easing('emphasized-decelerate')}`,
+                ),
+              ]),
+            ],
+            { delay: duration('medium2') },
+          ),
+        ]),
+      ]),
+    ]),
+    trigger('SearchControl', [
+      transition(':enter', [
+        query(':scope > *', [
+          style({ opacity: 0, transform: 'translateX(-8px)' }),
+          stagger(50, [
+            animate(
+              `${duration('medium1')} ${easing('emphasized-decelerate')}`,
+            ),
+          ]),
+        ]),
+      ]),
+    ]),
     trigger('SearchChips', [
       transition(':enter', [
         query('[adx-chip]', [
@@ -52,6 +93,12 @@ type BookmarkSearchMode = 'locate' | 'review';
             ),
           ]),
         ]),
+      ]),
+    ]),
+    trigger('SearchSwitchInstruction', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(-8px)' }),
+        animate(`${duration('medium1')} ${easing('emphasized-decelerate')}`),
       ]),
     ]),
   ],

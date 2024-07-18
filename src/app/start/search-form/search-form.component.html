@@ -4,35 +4,42 @@
   (ngSubmit)="onSubmit()"
 >
   @let controls = form.controls;
-  @let searchIcon = searchSource() === 'internet' ? 'search' : 'bookmark_star';
-  @let placeholder =
+  @let searchControlConfig =
     searchSource() === 'internet'
-      ? 'Search from ' + controls.engine.value.name
-      : 'Search your bookmarks';
-  <div class="bg-surface-container-high rounded-extra-large">
-    <adx-search
-      [leadingIcon]="searchIcon"
-      class="[view-transition-name:search-container]"
-    >
-      <input
-        adx-search-control
-        type="search"
-        autofocus
-        [placeholder]="placeholder"
-        [formControl]="controls.keywords"
-      />
-      <ng-container *adxSearchTrailing>
-        <button adx-icon-button>
-          <adx-icon icon="mic" />
-        </button>
-        @if (searchSource() === 'internet') {
-          <button adx-icon-button>
-            <adx-icon icon="camera" />
-          </button>
+      ? {
+          icon: 'search',
+          placeholder: 'Search from ' + controls.engine.value.name,
         }
-      </ng-container>
-    </adx-search>
-  </div>
+      : {
+          icon: 'bookmark_star',
+          placeholder: 'Search your bookmarks',
+        };
+  searchSource() === 'internet' ? 'Search from ' + controls.engine.value.name :
+  'Search your bookmarks';
+  <adx-search
+    [leadingIcon]="searchControlConfig.icon"
+    class="[view-transition-name:search-container]"
+    *adxRerender="searchControlConfig"
+    @SearchControl
+  >
+    <input
+      adx-search-control
+      type="search"
+      autofocus
+      [placeholder]="searchControlConfig.placeholder"
+      [formControl]="controls.keywords"
+    />
+    <ng-container *adxSearchTrailing>
+      <button adx-icon-button>
+        <adx-icon icon="mic" />
+      </button>
+      @if (searchSource() === 'internet') {
+        <button adx-icon-button>
+          <adx-icon icon="camera" />
+        </button>
+      }
+    </ng-container>
+  </adx-search>
   <div class="flex px-[4px] gap-[4px]">
     @let selectConfig =
       searchSource() === 'internet'
@@ -46,12 +53,16 @@
       [formControl]="selectConfig.control"
       @SearchChips
     />
-    <div class="flex gap-[12px] items-end">
-      <span class="text-on-surface-variant label-large">
-        @let instruction =
-          searchSource() === 'internet'
-            ? 'Or switch to bookmark search'
-            : 'Or back to explore the internet';
+    <div class="switch-actions flex gap-[12px] items-end">
+      @let instruction =
+        searchSource() === 'internet'
+          ? 'Or switch to bookmark search'
+          : 'Or back to explore the internet';
+      <span
+        class="text-on-surface-variant label-large"
+        @SearchSwitchInstruction
+        *adxRerender="instruction"
+      >
         {{ instruction }}
       </span>
       <adx-switch [icons]="true" [(value)]="searchSourceSwitchValue" />
