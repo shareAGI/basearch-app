@@ -7,7 +7,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { match } from 'ts-pattern';
@@ -107,7 +107,7 @@ export class SearchFormComponent {
   private router = inject(Router);
   private formBuilder = inject(FormBuilder).nonNullable;
 
-  searchSourceSwitchValue = signal(false);
+  searchSourceSwitchValue = signal(this.readLocalSearchSourceSwitchValue());
   searchSource = computed<SearchSource>(() =>
     this.searchSourceSwitchValue() ? 'bookmarks' : 'internet',
   );
@@ -137,6 +137,12 @@ export class SearchFormComponent {
     mode: 'locate' as BookmarkSearchMode,
   });
 
+  constructor() {
+    effect(() => {
+      this.saveLocalSearchSourceSwitchValue(this.searchSourceSwitchValue());
+    });
+  }
+
   onSubmit(): void {
     const source = this.searchSource();
     match(source)
@@ -157,5 +163,15 @@ export class SearchFormComponent {
     const { keywords } = this.form.value;
     if (!keywords) throw new Error('Invalid form state');
     this.router.navigate(['/start/search', { query: keywords }]);
+  }
+
+  private readLocalSearchSourceSwitchValue(): boolean {
+    const raw = localStorage.getItem('searchSourceSwitchValue');
+    if (!raw) return false;
+    return JSON.parse(raw);
+  }
+
+  private saveLocalSearchSourceSwitchValue(value: boolean): void {
+    localStorage.setItem('searchSourceSwitchValue', JSON.stringify(value));
   }
 }
