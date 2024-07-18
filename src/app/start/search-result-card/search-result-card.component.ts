@@ -13,9 +13,10 @@ import { Component, computed, input, signal } from '@angular/core';
 })
 export class SearchResultCardComponent {
   headline = input.required<string>();
-  cover = input.required<string>();
-  summary = input.required<string>();
   url = input.required<string>();
+  cover = input<string>();
+  summary = input<string>();
+
   urlPrettified = computed(() => {
     const url = this.url();
     const urlObject = new URL(url);

@@ -1,0 +1,7 @@
+@use 'three-dots' with (
+  $dot-color: var(--scheme-primary)
+);
+
+:host {
+  @apply inline-flex w-[48px] h-[24px] justify-center items-center;
+}

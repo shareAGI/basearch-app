@@ -84,6 +84,6 @@ export class SearchFormComponent {
   onBookmarkSearchSubmit(): void {
     const { keywords } = this.form.value;
     if (!keywords) throw new Error('Invalid form state');
-    this.router.navigate(['/start/search', { keywords }]);
+    this.router.navigate(['/start/search', { query: keywords }]);
   }
 }

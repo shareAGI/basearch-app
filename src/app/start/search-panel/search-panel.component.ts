@@ -1,9 +1,14 @@
 import { Component, computed, inject, input } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { startWith, switchMap } from 'rxjs';
 
+import { bookmarkIsCaptured } from '../../../shared/bookmark';
+import { BookmarkService } from '../../core/bookmark.service';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IconButtonComponent } from '../../shared/icon-button/icon-button.component';
+import { LoadingOverlayComponent } from '../../shared/loading-overlay/loading-overlay.component';
 import {
   SearchComponent,
   SearchTrailingSlot,
@@ -21,23 +26,33 @@ import { SearchResultCardComponent } from '../search-result-card/search-result-c
     IconComponent,
     IconButtonComponent,
     SearchResultCardComponent,
+    LoadingOverlayComponent,
   ],
   templateUrl: './search-panel.component.html',
   styleUrl: './search-panel.component.scss',
 })
 export class SearchPanelComponent {
   private formBuilder = inject(FormBuilder).nonNullable;
+  private bookmarksService = inject(BookmarkService);
 
-  keywordsInitial = input.required<string>({ alias: 'keywords' });
-  keywordsControl = computed(() =>
-    this.formBuilder.control(this.keywordsInitial()),
+  queryInitial = input.required<string>({ alias: 'query' });
+  queryControl = computed(() => this.formBuilder.control(this.queryInitial()));
+
+  searchResults$ = toObservable(this.queryControl).pipe(
+    switchMap((c) => c.valueChanges.pipe(startWith(c.value))),
+    switchMap((query) => this.bookmarksService.search(query)),
   );
+  searchResults = toSignal(this.searchResults$);
 
-  card = {
-    headline: 'Headline',
-    url: 'https://domain.com/asdfasdfasdf.html',
-    cover: 'https://domain.com/asdfasdfasdf.jpg',
-    summary: 'adsfasfasdasdf',
-  };
-  cards = [this.card, this.card, this.card, this.card, this.card, this.card];
+  cards = computed(() => {
+    const results = this.searchResults();
+    return results?.map((result) => ({
+      headline: result.title,
+      url: result.url,
+      ...(bookmarkIsCaptured(result) && {
+        cover: result.screenshot,
+        summary: result.document,
+      }),
+    }));
+  });
 }

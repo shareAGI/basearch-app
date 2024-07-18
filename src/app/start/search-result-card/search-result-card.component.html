@@ -1,7 +1,8 @@
 <a [href]="url()" target="_blank">
+  @let coverUrl = cover() ? 'url(' + cover + ')' : undefined;
   <div
     class="bg-secondary-container bg-cover bg-center aspect-[3/2] rounded-medium"
-    style.background-image="url({{ cover() }})"
+    [style.background-image]="coverUrl"
   ></div>
 </a>
 
@@ -21,7 +22,7 @@
     <div
       class="flex-1 min-h-0 text-on-surface-variant body-medium overflow-auto"
     >
-      {{ summary() }}
+      {{ summary() ?? 'No summary available' }}
     </div>
   }
   <div

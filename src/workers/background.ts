@@ -10,11 +10,12 @@ import {
   timer,
 } from 'rxjs';
 
+import { QueryBookmarks, QueryBookmarksResolved } from '../shared/bookmark';
 import { CaptureDom, CaptureDomCompleted } from '../shared/dom';
 import { listen, send } from '../shared/messenger';
 import { QueryWallpaper, QueryWallpaperResolved } from '../shared/wallpaper';
 import { fetchWallpaperFromBing } from './core/bing-wallpaper';
-import { createBookmarks } from './core/bookmark-endpoints';
+import { createBookmarks, searchBookmarks } from './core/bookmark-endpoints';
 import { httpClient } from './core/http-client';
 
 const wallpaper$ = timer(0, 1000 * 60 * 60 * 1).pipe(
@@ -30,6 +31,11 @@ listen(QueryWallpaper)
   .subscribe(([, wallpaper]) => {
     send(QueryWallpaperResolved, wallpaper);
   });
+
+listen(QueryBookmarks).subscribe(async (query) => {
+  const bookmarks = await searchBookmarks(query);
+  send(QueryBookmarksResolved, bookmarks);
+});
 
 chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
   if (!bookmark.url) return;

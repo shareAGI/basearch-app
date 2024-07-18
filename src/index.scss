@@ -68,7 +68,7 @@ router-outlet {
 
 ::view-transition-group(*) {
   animation-timing-function: var(--motion-easing-emphasized);
-  animation-duration: var(--motion-duration-long1);
+  animation-duration: var(--motion-duration-medium2);
 }
 
 @layer base {
