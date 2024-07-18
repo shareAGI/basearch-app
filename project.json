@@ -14,12 +14,7 @@
         "browser": "src/main.ts",
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "public"
-          }
-        ],
+        "assets": [{ "glob": "**/*", "input": "public" }, "src/manifest.json"],
         "styles": ["src/index.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["{projectRoot}/src/app"]
@@ -71,12 +66,7 @@
       "options": {
         "tsConfig": "tsconfig.spec.json",
         "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "public"
-          }
-        ],
+        "assets": [{ "glob": "**/*", "input": "public" }, "src/manifest.json"],
         "styles": ["src/index.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["{projectRoot}/src/app"]
