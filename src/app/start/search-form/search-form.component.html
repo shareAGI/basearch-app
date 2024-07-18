@@ -14,12 +14,10 @@
           icon: 'bookmark_star',
           placeholder: 'Search your bookmarks',
         };
-  searchSource() === 'internet' ? 'Search from ' + controls.engine.value.name :
-  'Search your bookmarks';
   <adx-search
     [leadingIcon]="searchControlConfig.icon"
     class="[view-transition-name:search-container]"
-    *adxRerender="searchControlConfig"
+    *adxRerender="searchSource()"
     @SearchControl
   >
     <input
