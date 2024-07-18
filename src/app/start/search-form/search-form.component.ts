@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { match } from 'ts-pattern';
 
 import { duration, easing } from '../../core/animations';
+import { CaptureFocusDirective } from '../../shared/capture-focus.directive';
 import { ChipSelectComponent } from '../../shared/chip-select/chip-select.component';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IconButtonComponent } from '../../shared/icon-button/icon-button.component';
@@ -39,6 +40,7 @@ type BookmarkSearchMode = 'locate' | 'review';
     ChipSelectComponent,
     SwitchComponent,
     RerenderDirective,
+    CaptureFocusDirective,
   ],
   templateUrl: './search-form.component.html',
   styleUrl: './search-form.component.scss',

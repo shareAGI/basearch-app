@@ -6,6 +6,7 @@ import { startWith, switchMap } from 'rxjs';
 
 import { bookmarkIsCaptured } from '../../../shared/bookmark';
 import { BookmarkService } from '../../core/bookmark.service';
+import { CaptureFocusDirective } from '../../shared/capture-focus.directive';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { IconButtonComponent } from '../../shared/icon-button/icon-button.component';
 import { LoadingOverlayComponent } from '../../shared/loading-overlay/loading-overlay.component';
@@ -27,6 +28,7 @@ import { SearchResultCardComponent } from '../search-result-card/search-result-c
     IconButtonComponent,
     SearchResultCardComponent,
     LoadingOverlayComponent,
+    CaptureFocusDirective,
   ],
   templateUrl: './search-panel.component.html',
   styleUrl: './search-panel.component.scss',
