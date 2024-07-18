@@ -4,7 +4,7 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { startWith, switchMap } from 'rxjs';
+import { debounceTime, startWith, switchMap } from 'rxjs';
 
 import { bookmarkIsDetailed } from '../../../shared/bookmark';
 import { duration, easing } from '../../core/animations';
@@ -67,6 +67,7 @@ export class SearchPanelComponent {
 
   searchResults$ = toObservable(this.queryControl).pipe(
     switchMap((c) => c.valueChanges.pipe(startWith(c.value))),
+    debounceTime(500),
     switchMap((query) => this.bookmarksService.search(query)),
   );
   searchResults = toSignal(this.searchResults$);
