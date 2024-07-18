@@ -1,0 +1,29 @@
+<div
+  class="bg-secondary-container bg-cover bg-center rounded-[inherit] rounded-r-none [view-transition-name:search-detail-image]"
+  [style.background-image]="imageUrl() && 'url(' + imageUrl() + ')'"
+></div>
+
+<div class="relative flex flex-col p-[16px] gap-[16px] items-stretch">
+  <div class="absolute right-[8px] top-[8px]">
+    <button adx-icon-button (click)="onCloseClick()">
+      <adx-icon icon="close" />
+    </button>
+  </div>
+
+  <div class="headline-small text-on-surface">{{ headline() }}</div>
+  <div class="flex-1 min-h-0 body-large text-on-surface-variant overflow-auto">
+    {{ description() }}
+  </div>
+  <div class="flex items-center">
+    <span
+      class="flex-1 min-w-0 label-large text-on-surface-variant text-nowrap text-ellipsis overflow-hidden"
+    >
+      {{ url() | shortUrl }}
+    </span>
+    <div>
+      <button adx-icon-button>
+        <adx-icon icon="send" />
+      </button>
+    </div>
+  </div>
+</div>

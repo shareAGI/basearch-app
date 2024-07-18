@@ -27,7 +27,7 @@ const config: ApplicationConfig = {
       enableRoutesLoaderInjectionContext(routes),
       withComponentInputBinding(),
       withHashLocation(),
-      withViewTransitions(),
+      withViewTransitions({}),
     ),
     provideHttpClient(withFetch()),
   ],

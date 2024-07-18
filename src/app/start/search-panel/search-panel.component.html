@@ -1,60 +1,76 @@
-<adx-search>
-  <input
-    adx-search-control
-    type="search"
-    [formControl]="queryControl()"
-    adxCaptureFocus
-  />
-  <ng-container *adxSearchTrailing>
-    <button
-      adx-icon-button
-      [routerLink]="['/start', { query: queryControl().value }]"
-    >
-      <adx-icon icon="close" />
-    </button>
-  </ng-container>
-</adx-search>
-<div class="border-b-[1px] border-b-outline-variant"></div>
-
-@let columnPadding = 24;
-<div
-  class="relative flex-1 min-h-0 overflow-auto scroll-hidden"
-  [style.padding.px]="columnPadding"
-  [style.padding-bottom]="0"
->
-  @if (cards(); as cards) {
-    @let columnWidth = columnSizer.boundingBox().width;
-    <ngx-masonry
-      [options]="{
-        columnWidth: '.sizer',
-        gutter: columnPadding,
-        animations: cardAnimations,
-      }"
-      @SearchResults
-    >
-      <div
-        class="absolute inset-0 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] [scrollbar-width:none] invisible pointer-events-none"
-        [style.gap.px]="columnPadding"
+<adx-search-container class="relative">
+  <adx-search>
+    <input
+      adx-search-control
+      type="search"
+      [formControl]="queryControl()"
+      adxCaptureFocus
+    />
+    <ng-container *adxSearchTrailing>
+      <button
+        adx-icon-button
+        [routerLink]="['/start', { query: queryControl().value }]"
       >
-        <div class="sizer" adxBoundingBox #columnSizer="adxBoundingBox"></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      @for (card of cards; track card.url) {
-        <button
-          adx-search-result-card
-          ngxMasonryItem
-          [headline]="card.headline"
-          [url]="card.url"
-          [coverUrl]="card.cover"
-          [coverRatio]="card.coverRatio"
-          [style.width.px]="columnWidth"
-          [style.margin-bottom.px]="columnPadding"
-        ></button>
-      }
-    </ngx-masonry>
-  } @else {
-    <adx-loading-overlay />
+        <adx-icon icon="close" />
+      </button>
+    </ng-container>
+  </adx-search>
+  <div class="border-b-[1px] border-b-outline-variant"></div>
+
+  @let columnPadding = 24;
+  <div
+    class="relative flex-1 min-h-0 overflow-auto scroll-hidden"
+    [style.padding.px]="columnPadding"
+    [style.padding-bottom]="0"
+  >
+    @if (cards(); as cards) {
+      @let columnWidth = columnSizer.boundingBox().width;
+      <ngx-masonry
+        [options]="{
+          columnWidth: '.sizer',
+          gutter: columnPadding,
+          animations: cardAnimations,
+        }"
+        @SearchResults
+      >
+        <div
+          class="absolute inset-0 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] [scrollbar-width:none] invisible pointer-events-none"
+          [style.gap.px]="columnPadding"
+        >
+          <div class="sizer" adxBoundingBox #columnSizer="adxBoundingBox"></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        @for (card of cards; track $index) {
+          @let isFutureSelection =
+            $index === futureSelectionIndex() && !selectedIndex();
+          <button
+            adx-search-result-card
+            ngxMasonryItem
+            [class.future-selection]="isFutureSelection"
+            [headline]="card.headline"
+            [url]="card.url"
+            [coverUrl]="card.cover"
+            [coverRatio]="card.coverRatio"
+            [style.width.px]="columnWidth"
+            [style.margin-bottom.px]="columnPadding"
+            (click)="select($index)"
+          ></button>
+        }
+      </ngx-masonry>
+    } @else {
+      <adx-loading-overlay />
+    }
+  </div>
+
+  @if (selectedIndex()) {
+    <adx-search-detail
+      class="absolute inset-0"
+      headline="Headline"
+      url="https://example.com"
+      imageUrl="adsfsad"
+      description="asdfsadf"
+    />
   }
-</div>
+</adx-search-container>

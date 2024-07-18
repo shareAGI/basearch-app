@@ -1,5 +1,5 @@
 <div
-  class="bg-secondary-container bg-cover bg-center first-line: rounded-medium"
+  class="bg-secondary-container bg-cover bg-center rounded-medium"
   [style.background-image]="coverUrl() && 'url(' + coverUrl() + ')'"
   [style.aspect-ratio]="coverRatio()"
 ></div>
@@ -8,6 +8,6 @@
   <div
     class="text-on-surface-variant label-large text-nowrap text-ellipsis overflow-hidden"
   >
-    {{ urlPrettified() }}
+    {{ url() | shortUrl }}
   </div>
 </div>

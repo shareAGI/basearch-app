@@ -83,7 +83,7 @@ router-outlet {
 }
 
 ::view-transition-group(*) {
-  animation-timing-function: var(--motion-easing-emphasized);
+  animation-timing-function: var(--motion-easing-emphasized-experimental);
   animation-duration: var(--motion-duration-medium2);
 }
 

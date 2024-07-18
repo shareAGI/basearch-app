@@ -1,5 +1,5 @@
 :host {
-  @apply flex flex-col w-[68dvw] max-w-[968px] h-[68dvh] items-stretch bg-surface-container-high rounded-large [view-transition-name:search-container];
+  @apply contents;
 }
 
 adx-search ::ng-deep {
@@ -11,5 +11,31 @@ adx-search ::ng-deep {
   }
   .trailing {
     @apply [view-transition-name:search-control-trailing];
+  }
+}
+
+[adx-search-result-card].future-selection ::ng-deep {
+  @apply [view-transition-name:search-detail];
+  > :first-child {
+    @apply [view-transition-name:search-detail-image];
+  }
+  > :last-child {
+    @apply [view-transition-name:useless];
+  }
+}
+
+apx-search-detail {
+  @apply [view-transition-name:search-detail];
+}
+
+::ng-deep {
+  ::view-transition-old(useless) {
+    display: none;
+  }
+  ::view-transition-old(search-detail),
+  ::view-transition-new(search-detail),
+  ::view-transition-old(search-detail-image),
+  ::view-transition-new(search-detail-image) {
+    height: 100%;
   }
 }

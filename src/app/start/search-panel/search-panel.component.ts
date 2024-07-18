@@ -1,8 +1,8 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { startWith, switchMap } from 'rxjs';
 
@@ -19,6 +19,8 @@ import {
   SearchTrailingSlot,
 } from '../../shared/search/search.component';
 import { SearchControlComponent } from '../../shared/search-control/search-control.component';
+import { SearchContainerComponent } from '../core/search-container/search-container.component';
+import { SearchDetailComponent } from '../search-detail/search-detail.component';
 import { SearchResultCardComponent } from '../search-result-card/search-result-card.component';
 
 const SEARCH_RESULT_CARD_ANIMATIONS = {
@@ -45,6 +47,8 @@ const SEARCH_RESULT_CARD_ANIMATIONS = {
     LoadingOverlayComponent,
     CaptureFocusDirective,
     BoundingBoxDirective,
+    SearchContainerComponent,
+    SearchDetailComponent,
   ],
   templateUrl: './search-panel.component.html',
   styleUrl: './search-panel.component.scss',
@@ -60,6 +64,8 @@ const SEARCH_RESULT_CARD_ANIMATIONS = {
   ],
 })
 export class SearchPanelComponent {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private formBuilder = inject(FormBuilder).nonNullable;
   private bookmarksService = inject(BookmarkService);
 
@@ -71,6 +77,20 @@ export class SearchPanelComponent {
     switchMap((query) => this.bookmarksService.search(query)),
   );
   searchResults = toSignal(this.searchResults$);
+
+  futureSelectionIndex = signal<number | undefined>(undefined);
+  selectedIndex = input<number | undefined>(undefined, { alias: 'selected' });
+  selected = computed(() => {
+    const index = this.selectedIndex();
+    return index !== undefined && this.searchResults()?.[index];
+  });
+  select = (index: number): void => {
+    this.futureSelectionIndex.set(index);
+    this.router.navigate(
+      [{ selected: index }], //
+      { relativeTo: this.route },
+    );
+  };
 
   cardAnimations = SEARCH_RESULT_CARD_ANIMATIONS;
   cards = computed(
