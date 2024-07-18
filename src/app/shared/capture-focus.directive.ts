@@ -1,7 +1,7 @@
 import { afterNextRender, Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
-  selector: '[adxCaptureFocus]',
+  selector: '[bsCaptureFocus]',
   standalone: true,
 })
 export class CaptureFocusDirective {

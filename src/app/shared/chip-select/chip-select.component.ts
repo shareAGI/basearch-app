@@ -13,7 +13,7 @@ import { ChipButtonComponent } from '../chip/chip.component';
 import { ChipGroupComponent } from '../chip-group/chip-group.component';
 
 @Component({
-  selector: 'adx-chip-select',
+  selector: 'bs-chip-select',
   standalone: true,
   imports: [CommonModule, ChipButtonComponent, ChipGroupComponent],
   templateUrl: './chip-select.component.html',

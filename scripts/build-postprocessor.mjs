@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { globIterate } from 'glob';
 
-const DIST = 'dist/adx24-app/browser';
+const DIST = 'dist/basesearch/browser';
 
 main();
 

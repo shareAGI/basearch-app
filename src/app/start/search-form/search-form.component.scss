@@ -2,7 +2,7 @@
   @apply block w-[55dvw] max-w-[680px];
 }
 
-adx-search ::ng-deep {
+bs-search ::ng-deep {
   .leading {
     @apply [view-transition-name:search-control-leading];
   }

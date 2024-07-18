@@ -14,37 +14,37 @@
           icon: 'bookmark_star',
           placeholder: 'Search your bookmarks',
         };
-  <adx-search
+  <bs-search
     [leadingIcon]="searchControlConfig.icon"
     class="[view-transition-name:search-container]"
-    *adxRerender="searchSource()"
+    *bsRerender="searchSource()"
     @SearchControl
   >
     <input
-      adx-search-control
+      bs-search-control
       type="search"
       [placeholder]="searchControlConfig.placeholder"
       [formControl]="controls.query"
-      adxCaptureFocus
+      bsCaptureFocus
     />
-    <ng-container *adxSearchTrailing>
-      <button adx-icon-button>
-        <adx-icon icon="mic" />
+    <ng-container *bsSearchTrailing>
+      <button bs-icon-button>
+        <bs-icon icon="mic" />
       </button>
       @if (searchSource() === 'internet') {
-        <button adx-icon-button>
-          <adx-icon icon="camera" />
+        <button bs-icon-button>
+          <bs-icon icon="camera" />
         </button>
       }
     </ng-container>
-  </adx-search>
+  </bs-search>
   <div class="flex px-[4px] gap-[4px]">
     @let selectConfig =
       searchSource() === 'internet'
         ? { options: internetSearchEngineOptions, control: controls.engine }
         : { options: bookmarkSearchModeOptions, control: controls.mode };
-    <adx-chip-select
-      *adxRerender="selectConfig"
+    <bs-chip-select
+      *bsRerender="selectConfig"
       class="flex-1 min-w-0 px-[4px]"
       scrollable
       [options]="selectConfig.options"
@@ -59,11 +59,11 @@
       <span
         class="text-on-surface-variant label-large"
         @SearchSwitchInstruction
-        *adxRerender="instruction"
+        *bsRerender="instruction"
       >
         {{ instruction }}
       </span>
-      <adx-switch [icons]="true" [(value)]="searchSourceSwitchValue" />
+      <bs-switch [icons]="true" [(value)]="searchSourceSwitchValue" />
     </div>
   </div>
   <div class="h-[30dvh] pointer-events-none"></div>

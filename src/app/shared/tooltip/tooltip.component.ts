@@ -11,7 +11,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { duration, easing } from '../../core/animations';
 
 @Component({
-  selector: 'adx-tooltip',
+  selector: 'bs-tooltip',
   standalone: true,
   imports: [],
   templateUrl: './tooltip.component.html',

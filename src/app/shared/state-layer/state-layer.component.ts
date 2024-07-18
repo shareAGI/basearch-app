@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'adx-state-layer',
+  selector: 'bs-state-layer',
   standalone: true,
   imports: [],
   templateUrl: './state-layer.component.html',

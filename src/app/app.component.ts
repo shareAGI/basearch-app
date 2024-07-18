@@ -5,7 +5,7 @@ import { Wallpaper } from '../shared/wallpaper';
 import { LoadingIndicatorComponent } from './shared/loading-indicator/loading-indicator.component';
 
 @Component({
-  selector: 'adx-root',
+  selector: 'bs-root',
   standalone: true,
   imports: [RouterOutlet, LoadingIndicatorComponent],
   templateUrl: './app.component.html',

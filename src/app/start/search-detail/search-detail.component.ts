@@ -7,7 +7,7 @@ import { ShortUrlPipe } from '../../shared/short-url.pipe';
 import { SearchContainerComponent } from '../core/search-container/search-container.component';
 
 @Component({
-  selector: 'adx-search-detail',
+  selector: 'bs-search-detail',
   standalone: true,
   imports: [
     SearchContainerComponent,

@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'adx-chip-group',
+  selector: 'bs-chip-group',
   standalone: true,
   templateUrl: './chip-group.component.html',
   styleUrls: ['./chip-group.component.scss'],

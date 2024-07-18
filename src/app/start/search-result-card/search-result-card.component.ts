@@ -3,7 +3,7 @@ import { Component, input, signal } from '@angular/core';
 import { ShortUrlPipe } from '../../shared/short-url.pipe';
 
 @Component({
-  selector: 'button[adx-search-result-card]',
+  selector: 'button[bs-search-result-card]',
   standalone: true,
   imports: [ShortUrlPipe],
   templateUrl: './search-result-card.component.html',

@@ -3,7 +3,7 @@ import { Directive, ElementRef, inject } from '@angular/core';
 import { useBrowserOnly } from '../../common/platform-browser';
 
 @Directive({
-  selector: '[adxStateLayerTrigger]',
+  selector: '[bsStateLayerTrigger]',
   standalone: true,
   host: { class: 'state-layer-trigger' },
 })

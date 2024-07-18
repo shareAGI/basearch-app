@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'adx-loading-indicator',
+  selector: 'bs-loading-indicator',
   standalone: true,
   imports: [],
   templateUrl: './loading-indicator.component.html',

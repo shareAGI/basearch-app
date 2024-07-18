@@ -21,7 +21,7 @@ export const ICON_SIZE = new InjectionToken<number>('ICON_SIZE', {
 });
 
 @Component({
-  selector: 'adx-icon',
+  selector: 'bs-icon',
   standalone: true,
   imports: [AsyncPipe],
   templateUrl: './icon.component.html',

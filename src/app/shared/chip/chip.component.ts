@@ -26,7 +26,7 @@ const animations = [
     transition('* => *', [
       group([
         query(
-          'adx-icon:enter',
+          'bs-icon:enter',
           [
             style({ opacity: 0, width: 0 }),
             animate(`${duration('short2')} ${easing('standard')}`),
@@ -34,7 +34,7 @@ const animations = [
           { optional: true },
         ),
         query(
-          'adx-icon:leave',
+          'bs-icon:leave',
           [
             animate(`${duration('short2')} ${easing('standard')}`),
             style({ opacity: 0, width: 0 }),
@@ -47,7 +47,7 @@ const animations = [
 ];
 
 @Component({
-  selector: 'adx-chip',
+  selector: 'bs-chip',
   standalone: true,
   imports,
   templateUrl: './chip.component.html',
@@ -62,7 +62,7 @@ export class ChipComponent {
 }
 
 @Component({
-  selector: 'button[adx-chip]',
+  selector: 'button[bs-chip]',
   standalone: true,
   imports,
   templateUrl: './chip.component.html',

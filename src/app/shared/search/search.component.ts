@@ -12,7 +12,7 @@ import {
 import { IconComponent } from '../icon/icon.component';
 
 @Component({
-  selector: 'adx-search',
+  selector: 'bs-search',
   standalone: true,
   imports: [IconComponent, NgTemplateOutlet],
   templateUrl: './search.component.html',
@@ -25,7 +25,7 @@ export class SearchComponent {
 }
 
 @Directive({
-  selector: '[adxSearchTrailing]',
+  selector: '[bsSearchTrailing]',
   standalone: true,
 })
 export class SearchTrailingSlot {

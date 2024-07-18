@@ -25,7 +25,7 @@ import { SearchDetailComponent } from '../search-detail/search-detail.component'
 import { SearchResultCardComponent } from '../search-result-card/search-result-card.component';
 
 @Component({
-  selector: 'adx-search-panel',
+  selector: 'bs-search-panel',
   standalone: true,
   imports: [
     [NgxMasonryModule, MasonryAutoResizeDirective],

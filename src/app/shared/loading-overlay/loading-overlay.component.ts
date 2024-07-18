@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
 
 @Component({
-  selector: 'adx-loading-overlay',
+  selector: 'bs-loading-overlay',
   standalone: true,
   imports: [LoadingIndicatorComponent],
   templateUrl: './loading-overlay.component.html',

@@ -14,7 +14,7 @@ import { StateLayerComponent } from '../state-layer/state-layer.component';
 import { StateLayerTriggerDirective } from '../state-layer/state-layer-trigger.directive';
 
 @Component({
-  selector: 'adx-switch',
+  selector: 'bs-switch',
   standalone: true,
   imports: [StateLayerComponent, StateLayerTriggerDirective, IconComponent],
   templateUrl: './switch.component.html',

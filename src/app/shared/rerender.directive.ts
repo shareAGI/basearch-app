@@ -1,7 +1,7 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[adxRerender]',
+  selector: '[bsRerender]',
   standalone: true,
 })
 export class RerenderDirective<T> {
@@ -12,11 +12,11 @@ export class RerenderDirective<T> {
     private templateRef: TemplateRef<never>,
   ) {}
 
-  @Input('adxRerender') set value(value: T) {
+  @Input('bsRerender') set value(value: T) {
     if (value === this.valueCurrent) return;
     this.valueCurrent = value;
     this.viewContainer.clear();
-    const context: RerenderDirectiveTemplateContext<T> = { adxRerender: value };
+    const context: RerenderDirectiveTemplateContext<T> = { bsRerender: value };
     this.viewContainer.createEmbeddedView(this.templateRef, context);
   }
 
@@ -29,5 +29,5 @@ export class RerenderDirective<T> {
 }
 
 export interface RerenderDirectiveTemplateContext<T> {
-  adxRerender: T;
+  bsRerender: T;
 }

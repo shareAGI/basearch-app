@@ -15,7 +15,7 @@ import { SearchControlComponent } from '../shared/search-control/search-control.
 import { SwitchComponent } from '../shared/switch/switch.component';
 
 @Component({
-  selector: 'adx-start',
+  selector: 'bs-start',
   standalone: true,
   imports: [
     ReactiveFormsModule,

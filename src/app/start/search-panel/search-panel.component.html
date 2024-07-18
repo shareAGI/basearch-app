@@ -1,20 +1,20 @@
-<adx-search-container class="relative">
-  <adx-search>
+<bs-search-container class="relative">
+  <bs-search>
     <input
-      adx-search-control
+      bs-search-control
       type="search"
       [formControl]="queryControl()"
-      adxCaptureFocus
+      bsCaptureFocus
     />
-    <ng-container *adxSearchTrailing>
+    <ng-container *bsSearchTrailing>
       <button
-        adx-icon-button
+        bs-icon-button
         [routerLink]="['/start', { query: queryControl().value }]"
       >
-        <adx-icon icon="close" />
+        <bs-icon icon="close" />
       </button>
     </ng-container>
-  </adx-search>
+  </bs-search>
   <div class="border-b-[1px] border-b-outline-variant"></div>
 
   @let columnPadding = 24;
@@ -33,7 +33,7 @@
           class="absolute inset-0 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] [scrollbar-width:none] invisible pointer-events-none"
           [style.gap.px]="columnPadding"
         >
-          <div class="sizer" adxBoundingBox #columnSizer="adxBoundingBox"></div>
+          <div class="sizer" bsBoundingBox #columnSizer="bsBoundingBox"></div>
           <div></div>
           <div></div>
           <div></div>
@@ -42,7 +42,7 @@
           @let isFutureSelection =
             $index === futureSelectionIndex() && !selectedIndex();
           <button
-            adx-search-result-card
+            bs-search-result-card
             ngxMasonryItem
             [class.future-selection]="isFutureSelection"
             [headline]="card.headline"
@@ -56,12 +56,12 @@
         }
       </ngx-masonry>
     } @else {
-      <adx-loading-overlay />
+      <bs-loading-overlay />
     }
   </div>
 
   @if (selectedIndex()) {
-    <adx-search-detail
+    <bs-search-detail
       class="absolute inset-0"
       headline="Headline"
       url="https://example.com"
@@ -69,4 +69,4 @@
       description="asdfsadf"
     />
   }
-</adx-search-container>
+</bs-search-container>

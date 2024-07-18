@@ -4,7 +4,7 @@ import { StateLayerComponent } from '../state-layer/state-layer.component';
 import { StateLayerTriggerDirective } from '../state-layer/state-layer-trigger.directive';
 
 @Component({
-  selector: 'button[adx-icon-button]',
+  selector: 'button[bs-icon-button]',
   standalone: true,
   imports: [StateLayerComponent],
   templateUrl: './icon-button.component.html',

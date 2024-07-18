@@ -57,7 +57,7 @@ export const TOOLTIP_TRIGGER = new InjectionToken<Signal<'hover' | 'hold'>>(
 );
 
 @Directive({
-  selector: '[adxTooltip]',
+  selector: '[bsTooltip]',
   standalone: true,
   host: {
     '(mouseenter)': 'mouseenter$.next()',
@@ -75,7 +75,7 @@ export class TooltipDirective {
   private positions = inject(TOOLTIP_POSITIONS);
   private changeDetector = inject(ChangeDetectorRef);
 
-  content = input.required<string>({ alias: 'adxTooltip' });
+  content = input.required<string>({ alias: 'bsTooltip' });
 
   mouseenter$ = new Subject();
   mouseleave$ = new Subject();
@@ -143,10 +143,10 @@ export class TooltipDirective {
   }
 }
 @Component({
-  selector: 'adx-tooltip-container',
+  selector: 'bs-tooltip-container',
   standalone: true,
   imports: [TooltipComponent],
-  template: ` <adx-tooltip>{{ content() }}</adx-tooltip> `,
+  template: ` <bs-tooltip>{{ content() }}</bs-tooltip> `,
   styles: `
     :host {
       display: contents;

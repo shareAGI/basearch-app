@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: '[adx-search-control]',
+  selector: '[bs-search-control]',
   standalone: true,
   imports: [],
   templateUrl: './search-control.component.html',

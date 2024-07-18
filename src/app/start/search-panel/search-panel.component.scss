@@ -2,7 +2,7 @@
   @apply contents;
 }
 
-adx-search ::ng-deep {
+bs-search ::ng-deep {
   .leading {
     @apply [view-transition-name:search-control-leading];
   }
@@ -14,7 +14,7 @@ adx-search ::ng-deep {
   }
 }
 
-[adx-search-result-card].future-selection ::ng-deep {
+[bs-search-result-card].future-selection ::ng-deep {
   @apply [view-transition-name:search-detail];
   > :first-child {
     @apply [view-transition-name:search-detail-image];

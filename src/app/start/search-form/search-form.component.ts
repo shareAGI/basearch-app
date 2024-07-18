@@ -37,7 +37,7 @@ type SearchSource = 'internet' | 'bookmarks';
 type BookmarkSearchMode = 'locate' | 'review';
 
 @Component({
-  selector: 'adx-search-form',
+  selector: 'bs-search-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -63,11 +63,11 @@ type BookmarkSearchMode = 'locate' | 'review';
             ),
           ]),
           query(
-            '@SearchControl > *, @SearchChips [adx-chip], .switch-actions > *',
+            '@SearchControl > *, @SearchChips [bs-chip], .switch-actions > *',
             [style({ opacity: 0, transform: 'translateX(-8px)' })],
           ),
           query(
-            '@SearchControl > *, @SearchChips [adx-chip], .switch-actions > *',
+            '@SearchControl > *, @SearchChips [bs-chip], .switch-actions > *',
             [
               stagger(50, [
                 animate(
@@ -94,7 +94,7 @@ type BookmarkSearchMode = 'locate' | 'review';
     ]),
     trigger('SearchChips', [
       transition(':enter', [
-        query('[adx-chip]', [
+        query('[bs-chip]', [
           style({ opacity: 0, transform: 'translateX(-8px)' }),
           stagger(50, [
             animate(

@@ -5,8 +5,8 @@ import { map, startWith } from 'rxjs';
 import { ResizeObserver } from '../common/resize-observer.service';
 
 @Directive({
-  selector: '[adxBoundingBox]',
-  exportAs: 'adxBoundingBox',
+  selector: '[bsBoundingBox]',
+  exportAs: 'bsBoundingBox',
   standalone: true,
 })
 export class BoundingBoxDirective {
