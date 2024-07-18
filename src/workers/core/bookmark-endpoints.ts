@@ -15,23 +15,18 @@ interface BookmarkRecord {
 interface DetailedBookmarkRecord extends BookmarkRecord {
   ['summary']: string;
   ['cover_url']: string;
+  ['aspect_ratio']: number;
 }
 
-interface CapturedBookmarkRecord extends DetailedBookmarkRecord {
+interface CapturedBookmarkRecord extends BookmarkRecord {
   ['content']: string;
+  ['cover_url']: string;
 }
 
 function bookmarkRecordIsDetailed(
   record: BookmarkRecord,
 ): record is DetailedBookmarkRecord {
   return 'summary' in record && 'cover_url' in record;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function bookmarkRecordIsCaptured(
-  record: BookmarkRecord,
-): record is CapturedBookmarkRecord {
-  return bookmarkRecordIsDetailed(record) && 'content' in record;
 }
 
 export async function fetchBookmarks(): Promise<Bookmark[]> {
@@ -58,7 +53,7 @@ export async function searchBookmarks(
     createdAt: new Date(r.created_at),
     ...(bookmarkRecordIsDetailed(r) && {
       summary: r.summary,
-      screenshot: r.cover_url,
+      imageUrl: r.cover_url,
     }),
   }));
 }
@@ -72,9 +67,8 @@ export async function createBookmarks(
       ['title']: b.title,
       ['created_at']: b.createdAt.toISOString(),
       ...(bookmarkIsCaptured(b) && {
-        ['summary']: b.summary,
         ['content']: b.document,
-        ['cover_url']: b.screenshot,
+        ['cover_url']: b.imageUrl,
       }),
     }),
   );
@@ -88,7 +82,7 @@ export async function updateBookmark(
   await httpClient.patch(`api:bookmarks/${url}`, {
     ['title']: payload.title,
     ['content']: payload.document,
-    ['cover_url']: payload.screenshot,
+    ['cover_url']: payload.imageUrl,
   } satisfies Partial<CapturedBookmarkRecord>);
 }
 

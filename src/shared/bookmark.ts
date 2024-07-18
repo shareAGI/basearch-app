@@ -10,23 +10,25 @@ export interface Bookmark {
 
 export interface DetailedBookmark extends Bookmark {
   summary: string;
-  screenshot: string;
+  imageUrl: string;
+  imageRatio: number;
 }
 
-export interface CapturedBookmark extends DetailedBookmark {
+export interface CapturedBookmark extends Bookmark {
   document: string;
+  imageUrl: string;
 }
 
 export function bookmarkIsDetailed(
   bookmark: Bookmark,
 ): bookmark is DetailedBookmark {
-  return 'summary' in bookmark && 'screenshot' in bookmark;
+  return 'summary' in bookmark && 'imageUrl' in bookmark;
 }
 
 export function bookmarkIsCaptured(
   bookmark: Bookmark,
 ): bookmark is CapturedBookmark {
-  return bookmarkIsDetailed(bookmark) && 'document' in bookmark;
+  return 'document' in bookmark && 'imageUrl' in bookmark;
 }
 
 export const QueryBookmarks = define('QueryBookmarks', $type<string>());

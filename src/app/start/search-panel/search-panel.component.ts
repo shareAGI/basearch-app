@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { startWith, switchMap } from 'rxjs';
 
+import { bookmarkIsDetailed } from '../../../shared/bookmark';
 import { duration, easing } from '../../core/animations';
 import { BookmarkService } from '../../core/bookmark.service';
 import { BoundingBoxDirective } from '../../shared/bounding-box.directive';
@@ -22,16 +23,6 @@ import { SearchControlComponent } from '../../shared/search-control/search-contr
 import { SearchContainerComponent } from '../core/search-container/search-container.component';
 import { SearchDetailComponent } from '../search-detail/search-detail.component';
 import { SearchResultCardComponent } from '../search-result-card/search-result-card.component';
-
-const SEARCH_RESULT_CARD_ANIMATIONS = {
-  show: [
-    style({ opacity: 0, transform: 'scale(0.9)' }),
-    animate(
-      `${duration('medium1')} ${easing('emphasized-decelerate')}`,
-      style({ opacity: 1, transform: 'scale(1)' }),
-    ),
-  ],
-};
 
 @Component({
   selector: 'adx-search-panel',
@@ -92,60 +83,16 @@ export class SearchPanelComponent {
     );
   };
 
-  cardAnimations = SEARCH_RESULT_CARD_ANIMATIONS;
-  cards = computed(
-    () => [
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 3 / 2,
-        summary: 'adsfasfasdasdf',
-      },
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 2 / 3,
-        summary: 'adsfasfasdasdf',
-      },
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 3 / 5,
-        summary: 'adsfasfasdasdf',
-      },
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 4 / 7,
-        summary: 'adsfasfasdasdf',
-      },
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 4 / 5,
-        summary: 'adsfasfasdasdf',
-      },
-      {
-        headline: 'Headline',
-        url: 'https://domain.com/asdfasdfasdf.html',
-        cover: 'https://domain.com/asdfasdfasdf.jpg',
-        coverRatio: 4 / 6,
-        summary: 'adsfasfasdasdf',
-      },
-    ],
-    // const results = this.searchResults();
-    // return results?.map((result) => ({
-    //   headline: result.title,
-    //   url: result.url,
-    //   ...(bookmarkIsCaptured(result) && {
-    //     cover: result.screenshot,
-    //     summary: result.document,
-    //   }),
-    // }));
-  );
+  cards = computed(() => {
+    const results = this.searchResults();
+    return results?.map((result) => ({
+      headline: result.title,
+      url: result.url,
+      ...(bookmarkIsDetailed(result) && {
+        cover: result.imageUrl,
+        coverRatio: result.imageRatio,
+        summary: result.summary,
+      }),
+    }));
+  });
 }

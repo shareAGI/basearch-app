@@ -26,11 +26,7 @@
     @if (cards(); as cards) {
       @let columnWidth = columnSizer.boundingBox().width;
       <ngx-masonry
-        [options]="{
-          columnWidth: '.sizer',
-          gutter: columnPadding,
-          animations: cardAnimations,
-        }"
+        [options]="{ columnWidth: '.sizer', gutter: columnPadding }"
         @SearchResults
       >
         <div

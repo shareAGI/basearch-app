@@ -38,7 +38,7 @@ listen(QueryBookmarks).subscribe(async (query) => {
 });
 
 chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
-  if (!bookmark.url) return;
+  if (!bookmark.url || !bookmark.dateAdded) return;
   const [tab] = await chrome.tabs.query({ url: bookmark.url });
   if (!tab) return;
   setTimeout(() => send(CaptureDom, undefined, tab.id));
@@ -48,7 +48,8 @@ chrome.bookmarks.onCreated.addListener(async (id, bookmark) => {
       url: bookmark.url,
       title: bookmark.title,
       document: capture.document,
-      screenshot: capture.screenshot,
+      imageUrl: capture.screenshot,
+      createdAt: new Date(bookmark.dateAdded),
     },
   ]);
 });
